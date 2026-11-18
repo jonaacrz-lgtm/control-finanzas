@@ -143,7 +143,7 @@
         <div class="flex items-center justify-between px-1">
           <div>
             <h2 class="font-title-md text-title-md text-on-surface font-semibold">Tarjetas &amp; Cuentas</h2>
-            <p class="font-label-md text-label-md text-on-surface-variant">4 BAC • 1 Davivienda</p>
+            <p class="font-label-md text-label-md text-on-surface-variant">4 BAC • 1 Davivienda • 1 Wink</p>
           </div>
           <!-- Pill Selector: Deslizar vs Apiladas -->
           <div class="bg-surface-container-high p-1 rounded-full flex items-center gap-1 shadow-inner">
@@ -321,6 +321,37 @@
               </div>
             </div>
 
+            <!-- Card 5: Wink (Ahorros / Débito) - Turquesa Neón Distintivo -->
+            <div class="card-item snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl p-5 bg-gradient-to-br from-[#032e33] via-[#043e45] to-[#011c1f] border border-[#00e5c9]/40 shadow-lg relative flex flex-col justify-between h-[195px] cursor-pointer hover:scale-[1.01] transition-all overflow-hidden" data-index="5">
+              <div class="absolute -right-8 -top-8 w-28 h-28 bg-[#00e5c9]/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="flex justify-between items-start relative z-10">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-md bg-[#00e5c9] text-[#032e33] flex items-center justify-center font-black text-[12px] shadow-sm tracking-tighter">W</div>
+                  <div>
+                    <span class="font-label-md text-label-md text-[#22d3ee] font-semibold tracking-wider block">WINK JONA</span>
+                    <p class="font-body-md text-body-md text-on-surface font-medium leading-tight text-xs">Ahorros Wink</p>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-[#00e5c9]/20 text-[#2dd4bf] border border-[#00e5c9]/30 text-[10px] font-semibold">DÉBITO / AHORRO</span>
+              </div>
+              <div class="flex items-center gap-3 relative z-10">
+                <div class="w-7 h-5 rounded bg-amber-400/20 border border-amber-300/30 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[13px] text-amber-300">contactless</span>
+                </div>
+                <span class="font-title-md text-title-md text-on-surface tracking-widest font-mono">•••• 4120</span>
+              </div>
+              <div class="flex justify-between items-end relative z-10">
+                <div>
+                  <span class="font-label-md text-label-md text-on-surface-variant block text-[10px]">SALDO ACTUAL (BRUTO)</span>
+                  <span class="font-title-md text-title-md text-[#2dd4bf] font-bold" id="card-5-balance">₡0</span>
+                </div>
+                <div class="text-right">
+                  <span class="font-label-md text-label-md text-slate-500 block text-[9px]">Coopenae</span>
+                  <span class="font-label-md text-label-md text-on-surface-variant font-medium">Jona</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Vista 2: Stack de Tarjetas Apiladas -->
@@ -334,6 +365,7 @@
               <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(2)" data-dot="2"></span>
               <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(3)" data-dot="3"></span>
               <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(4)" data-dot="4"></span>
+              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(5)" data-dot="5"></span>
             </div>
           </div>
         </div>
@@ -554,62 +586,62 @@
     <div id="tab-presupuestos" class="hidden flex flex-col w-full gap-space-md">
       
       <!-- Overview Card -->
-      <section class="flex flex-col bg-surface-container-low rounded-2xl p-space-lg shadow-xl relative overflow-hidden border border-surface-container-high/60 mt-4">
-        <div class="flex items-center justify-between gap-space-sm mb-space-sm">
-          <div class="flex items-center gap-space-xs bg-surface-container-high px-3 py-1.5 rounded-full">
-            <span class="font-label-lg text-label-lg text-primary tracking-wide">Noviembre 2026</span>
+      <section class="flex flex-col bg-surface-container-low rounded-2xl p-4 shadow-xl relative overflow-hidden border border-surface-container-high/60 mt-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-full">
+            <span class="text-xs font-semibold text-primary tracking-wide">Noviembre 2026</span>
           </div>
-          <button onclick="openBudgetModal()" class="flex items-center gap-1.5 bg-surface-container-highest hover:bg-surface-bright text-primary text-label-lg font-label-lg px-3 py-1.5 rounded-full transition-all duration-200 focus:outline-none shadow-sm cursor-pointer" id="open-config-btn">
-            <span class="material-symbols-outlined text-[17px] text-primary">tune</span>
+          <button onclick="openBudgetModal()" class="flex items-center gap-1 bg-surface-container-highest hover:bg-surface-bright text-primary text-xs font-semibold px-2.5 py-1 rounded-full transition-all duration-200 focus:outline-none shadow-sm cursor-pointer" id="open-config-btn">
+            <span class="material-symbols-outlined text-[15px] text-primary">tune</span>
             <span>Ajustar ⚙️</span>
           </button>
         </div>
 
-        <div class="flex flex-col gap-1 mb-space-md">
-          <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Presupuesto Mensual Pareja</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-[10px] text-on-surface-variant uppercase tracking-wider font-semibold">Presupuesto Mensual Pareja</span>
           <div class="flex items-baseline justify-between flex-wrap gap-x-2">
-            <span class="font-headline-lg text-2xl font-bold text-on-surface tracking-tight" id="hero-spent-display">₡871.871</span>
-            <span class="font-body-md text-body-md text-on-surface-variant">de <span class="text-primary font-semibold" id="hero-total-display">₡1.440.324</span></span>
+            <span class="text-lg font-bold text-on-surface tracking-tight font-mono" id="hero-spent-display">₡871.871</span>
+            <span class="text-xs text-on-surface-variant font-mono">de <span class="text-primary font-semibold" id="hero-total-display">₡1.440.324</span></span>
           </div>
-          <div class="flex items-center justify-between text-label-md font-label-md mt-1">
-            <span class="text-secondary flex items-center gap-1">
+          <div class="flex items-center justify-between text-xs mt-0.5">
+            <span class="text-secondary flex items-center gap-1 font-mono text-[11px]">
               <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
               <span id="hero-avail-display">₡568.453 disponible</span>
             </span>
-            <span class="text-primary-container font-semibold" id="hero-percent-display">60.5% consumido</span>
+            <span class="text-primary-container font-semibold text-[11px] font-mono" id="hero-percent-display">60.5% consumido</span>
           </div>
         </div>
 
         <!-- Progress Track with Dual Accent Gradient -->
-        <div class="w-full h-3 rounded-full bg-surface-container-highest overflow-hidden relative p-[2px]">
+        <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden relative">
           <div class="h-full rounded-full bg-gradient-to-r from-secondary via-primary to-tertiary-container transition-all duration-700 ease-out" id="hero-progress-bar" style="width: 60.5%;"></div>
         </div>
 
-        <div class="flex items-center justify-between pt-space-sm mt-space-sm text-label-md font-label-md text-on-surface-variant border-t border-surface-container-high/60">
-          <div class="flex items-center -space-x-1.5">
-            <div class="w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-[10px] font-bold shadow-sm">F</div>
-            <div class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-[10px] font-bold shadow-sm">J</div>
+        <div class="flex items-center justify-between pt-2 text-[10px] text-on-surface-variant border-t border-surface-container-high/60">
+          <div class="flex items-center -space-x-1">
+            <div class="w-4 h-4 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-[9px] font-bold shadow-sm">F</div>
+            <div class="w-4 h-4 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-[9px] font-bold shadow-sm">J</div>
             <span class="ml-2 text-on-surface-variant">Ciclo al 24 Nov</span>
           </div>
-          <span class="text-secondary font-medium">11 categorías activas</span>
+          <span class="text-secondary font-medium font-mono text-[10px]">11 categorías activas</span>
         </div>
       </section>
 
       <!-- Banner Dinámico: Saldo Libre No Asignado (Ingresos Extras / Ahorro Disponible) -->
-      <section class="bg-gradient-to-r from-emerald-950/40 via-surface-container-low to-surface-container rounded-2xl p-space-md border border-emerald-500/30 shadow-lg relative overflow-hidden" id="unallocatedBanner">
+      <section class="bg-gradient-to-r from-emerald-950/40 via-surface-container-low to-surface-container rounded-2xl p-3 border border-emerald-500/30 shadow-lg relative overflow-hidden" id="unallocatedBanner">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
-              <span class="material-symbols-outlined text-[22px]">savings</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[18px]">savings</span>
             </div>
             <div>
-              <span class="text-[11px] font-label-md text-emerald-300 font-semibold tracking-wide uppercase block">Dinero Libre No Asignado</span>
-              <span class="font-display-lg text-[22px] font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡20.000</span>
+              <span class="text-[10px] font-semibold text-emerald-300 tracking-wide uppercase block">Dinero Libre No Asignado</span>
+              <span class="text-base font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡20.000</span>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
-            <button onclick="openBudgetModal()" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer">
-              <span class="material-symbols-outlined text-[15px]">tune</span>
+            <button onclick="openBudgetModal()" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-[11px] font-semibold flex items-center gap-1 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">tune</span>
               <span>Asignar</span>
             </button>
           </div>
@@ -617,12 +649,12 @@
       </section>
 
       <!-- Lista de Categorías de Presupuesto -->
-      <section class="flex flex-col gap-space-sm">
+      <section class="flex flex-col gap-2">
         <div class="flex items-center justify-between px-1">
-          <h2 class="font-title-md text-title-md text-on-surface font-semibold">Categorías de Gasto</h2>
-          <span class="font-label-md text-label-md text-on-surface-variant">11 sobres</span>
+          <h2 class="text-xs font-semibold text-on-surface uppercase tracking-wider">Categorías de Gasto</h2>
+          <span class="text-[11px] text-on-surface-variant font-mono">11 sobres</span>
         </div>
-        <div id="budgetCategoryCards" class="space-y-3">
+        <div id="budgetCategoryCards" class="space-y-2">
           <!-- Renderizado dinámicamente con desglose Débito vs Crédito -->
         </div>
       </section>
@@ -1282,6 +1314,11 @@
               <span class="font-label-md text-[11px] font-semibold text-emerald-300 leading-tight">BN JONA</span>
               <span class="text-[9px] text-on-surface-variant leading-tight">Débito</span>
             </button>
+            <button class="account-btn p-2 rounded-xl border border-cyan-500/40 bg-surface-container-low hover:bg-surface-container-high flex flex-col items-center text-center gap-1 transition-all cursor-pointer" onclick="selectModalAccount(this, 'WINK JONA')" type="button">
+              <div class="w-6 h-6 rounded bg-[#00e5c9] text-[#032e33] flex items-center justify-center font-bold text-[10px]">W</div>
+              <span class="font-label-md text-[11px] font-semibold text-cyan-300 leading-tight">WINK JONA</span>
+              <span class="text-[9px] text-on-surface-variant leading-tight">Débito ••4120</span>
+            </button>
           </div>
 
           <div class="space-y-1.5">
@@ -1350,6 +1387,11 @@
               <span class="font-label-md text-[11px] font-semibold text-sky-300 leading-tight">AMEX BAC</span>
               <span class="text-[9px] text-on-surface-variant leading-tight">Crédito • Saldo a favor</span>
             </button>
+            <button class="account-btn p-2 rounded-xl border border-cyan-500/40 bg-surface-container-low hover:bg-surface-container-high flex flex-col items-center text-center gap-1 transition-all text-on-surface cursor-pointer" onclick="selectIngresoAccount(this, 'WINK JONA')" type="button">
+              <div class="w-6 h-6 rounded bg-[#00e5c9] text-[#032e33] flex items-center justify-center font-bold text-[10px]">W</div>
+              <span class="font-label-md text-[11px] font-semibold text-cyan-300 leading-tight">WINK JONA</span>
+              <span class="text-[9px] text-on-surface-variant leading-tight">Débito • Ahorro</span>
+            </button>
           </div>
 
           <div class="space-y-1">
@@ -1406,6 +1448,11 @@
                 <span class="font-label-md text-[11px] font-semibold text-sky-300 leading-tight">AMEX BAC</span>
                 <span class="text-[9px] text-on-surface-variant leading-tight">Crédito</span>
               </button>
+              <button class="account-btn p-2 rounded-xl border border-cyan-500/40 bg-surface-container-low hover:bg-surface-container-high flex flex-col items-center text-center gap-1 transition-all text-on-surface cursor-pointer" onclick="selectOriginAccount(this, 'WINK JONA')" type="button">
+                <div class="w-5 h-5 rounded bg-[#00e5c9] text-[#032e33] flex items-center justify-center font-bold text-[9px]">W</div>
+                <span class="font-label-md text-[11px] font-semibold text-cyan-300 leading-tight">WINK JONA</span>
+                <span class="text-[9px] text-on-surface-variant leading-tight">Ahorro</span>
+              </button>
             </div>
           </div>
 
@@ -1447,6 +1494,11 @@
                 <div class="w-5 h-5 rounded bg-[#0284c7] text-white flex items-center justify-center font-bold text-[9px]">BAC</div>
                 <span class="font-label-md text-[11px] font-semibold text-sky-300 leading-tight">AMEX BAC</span>
                 <span class="text-[9px] text-on-surface-variant leading-tight">Pago Tarjeta</span>
+              </button>
+              <button class="account-btn p-2 rounded-xl border border-cyan-500/40 bg-surface-container-low hover:bg-surface-container-high flex flex-col items-center text-center gap-1 transition-all text-on-surface cursor-pointer" onclick="selectDestAccount(this, 'WINK JONA')" type="button">
+                <div class="w-5 h-5 rounded bg-[#00e5c9] text-[#032e33] flex items-center justify-center font-bold text-[9px]">W</div>
+                <span class="font-label-md text-[11px] font-semibold text-cyan-300 leading-tight">WINK JONA</span>
+                <span class="text-[9px] text-on-surface-variant leading-tight">Ahorro</span>
               </button>
             </div>
           </div>
@@ -1510,6 +1562,56 @@
         <button onclick="guardarCambiosPresupuesto()" class="w-full py-3.5 bg-primary text-on-primary font-title-md text-title-md rounded-xl shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer font-bold">
           <span class="material-symbols-outlined text-[20px]">check</span>
           <span>Guardar Cambios de Presupuesto</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: CAMBIAR CATEGORÍA DE GASTO ==================== -->
+  <div class="fixed inset-0 z-50 flex flex-col justify-end bg-surface-container-lowest/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300" id="editCategoryModal" onclick="if (event.target === this) cerrarModalEditarCategoria()">
+    <div class="w-full max-h-[85vh] bg-surface-container rounded-t-3xl p-5 flex flex-col gap-3 transform translate-y-full transition-transform duration-300 overflow-hidden shadow-2xl" id="editCategorySheet">
+      
+      <div class="flex flex-col items-center gap-1.5 shrink-0">
+        <div class="w-12 h-1 rounded-full bg-surface-variant"></div>
+        <div class="w-full flex items-center justify-between mt-1">
+          <div>
+            <h3 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Cambiar Categoría de Gasto</h3>
+            <span class="font-label-md text-label-md text-on-surface-variant text-[11px]">Reclasifica este movimiento si se colocó mal</span>
+          </div>
+          <button onclick="cerrarModalEditarCategoria()" class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Resumen de la Transacción Seleccionada -->
+      <div class="bg-surface-container-low rounded-xl p-3 border border-surface-container-high/60 flex flex-col gap-1.5 shrink-0">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-on-surface truncate max-w-[200px]" id="editCatTxDetalle">Cargando...</span>
+          <span class="font-mono font-bold text-xs text-primary" id="editCatTxMonto">₡0</span>
+        </div>
+        <div class="flex items-center justify-between text-[10px] text-on-surface-variant">
+          <span id="editCatTxCuenta">Cuenta</span>
+          <span id="editCatTxFecha">Fecha</span>
+        </div>
+        <div class="flex items-center gap-1.5 pt-1 border-t border-surface-container-high/40 text-[11px]">
+          <span class="text-on-surface-variant">Categoría actual:</span>
+          <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-medium" id="editCatTxActual">Actual</span>
+        </div>
+      </div>
+
+      <!-- Grid de Categorías a Elegir -->
+      <div class="flex flex-col gap-1 flex-1 overflow-y-auto pr-1">
+        <span class="text-[11px] font-semibold text-on-surface uppercase tracking-wider block mb-1">Selecciona la nueva categoría:</span>
+        <div class="grid grid-cols-2 gap-2" id="editCatOptionsGrid">
+          <!-- Renderizado dinámicamente con las categorías -->
+        </div>
+      </div>
+
+      <div class="pt-2 shrink-0">
+        <button onclick="confirmarCambioCategoria()" class="w-full py-3 bg-primary text-on-primary font-semibold text-xs rounded-xl shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">check</span>
+          <span>Actualizar Categoría</span>
         </button>
       </div>
     </div>
@@ -1604,6 +1706,16 @@
         holders: "Fiorella Calvo",
         iban: "•••• 5842",
         colorClass: "bg-[#3b82f6]"
+      },
+      {
+        accountKey: "WINK JONA",
+        name: "Wink • Ahorros",
+        type: "Débito Wink (Coopenae)",
+        balanceId: "card-5-balance",
+        purpose: "Ahorros & Débito Digital",
+        holders: "Jonathan Morales",
+        iban: "•••• 4120",
+        colorClass: "bg-[#06b6d4]"
       }
     ];
 
@@ -1613,6 +1725,7 @@
         "BAC FIIO": 16116,
         "BAC JONA": 2858,
         "DAVI JONA": 19671,
+        "WINK JONA": 0,
         "BN JONA": 264,
         "AMEX BAC": 77702,
         "VISA BAC": 108317
@@ -1756,6 +1869,7 @@
       const totalLiquido = (estadoApp.saldosBruto["BAC FIIO"] || 0) + 
                            (estadoApp.saldosBruto["BAC JONA"] || 0) + 
                            (estadoApp.saldosBruto["DAVI JONA"] || 0) + 
+                           (estadoApp.saldosBruto["WINK JONA"] || 0) + 
                            (estadoApp.saldosBruto["BN JONA"] || 0);
       const totalDeudaCredito = (estadoApp.saldosBruto["AMEX BAC"] || 0) + 
                                (estadoApp.saldosBruto["VISA BAC"] || 0);
@@ -1778,6 +1892,8 @@
       setTxt('card-4-balance', formatCRC(estadoApp.saldosBruto["VISA BAC"]));
       setTxt('card-4-pay-now', (visa.aPagarEste24 === 0 || !visa.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24));
       setTxt('card-4-next-cycle', formatCRC(visa.acumuladoProximoCorte || 108317));
+
+      setTxt('card-5-balance', formatCRC(estadoApp.saldosBruto["WINK JONA"] || 0));
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
       const ingresosFaltantes = 538466; // Salarios pendientes de Noviembre (Jona: 2x 160k + Fiio: 218.4k)
@@ -1857,28 +1973,28 @@
         }
 
         return `
-          <article class="bg-surface-container-low rounded-2xl p-space-md flex flex-col gap-space-xs shadow-sm border border-surface-container-high/40">
+          <article class="bg-surface-container-low rounded-xl p-3 flex flex-col gap-1.5 shadow-sm border border-surface-container-high/40">
             <div class="flex items-center justify-between">
-              <div class="flex items-center gap-space-sm min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-xl shrink-0">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-base shrink-0">
                   ${cat.emoji}
                 </div>
                 <div class="flex flex-col min-w-0">
-                  <span class="font-title-md text-title-md text-on-surface truncate font-semibold">${cat.nombre}</span>
-                  <span class="font-label-md text-label-md text-on-surface-variant">${cat.desc}</span>
+                  <span class="text-xs text-on-surface truncate font-semibold">${cat.nombre}</span>
+                  <span class="text-[10px] text-on-surface-variant truncate">${cat.desc}</span>
                 </div>
               </div>
-              <div class="flex flex-col items-end">
-                <span class="font-label-lg text-label-lg font-bold text-on-surface font-mono">${formatCRC(gastado)}</span>
-                <span class="font-label-md text-label-md text-on-surface-variant font-mono">de ${formatCRC(cat.limite)}</span>
+              <div class="flex flex-col items-end shrink-0">
+                <span class="text-xs font-bold text-on-surface font-mono">${formatCRC(gastado)}</span>
+                <span class="text-[10px] text-on-surface-variant font-mono">de ${formatCRC(cat.limite)}</span>
               </div>
             </div>
-            <div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden mt-1">
+            <div class="w-full h-1.5 rounded-full bg-surface-container-highest overflow-hidden mt-0.5">
               <div class="h-full rounded-full ${barColor} transition-all duration-500" style="width: ${Math.min(100, pct)}%;"></div>
             </div>
-            <div class="flex items-center justify-between text-label-md font-label-md text-on-surface-variant pt-0.5">
+            <div class="flex items-center justify-between text-[10px] text-on-surface-variant pt-0.5 font-mono">
               <span class="${statusClass}">${statusText}</span>
-              <span class="font-medium ${restante >= 0 ? 'text-secondary' : 'text-tertiary'} font-mono">
+              <span class="font-medium ${restante >= 0 ? 'text-secondary' : 'text-tertiary'}">
                 ${restante >= 0 ? 'Quedan ' + formatCRC(restante) : 'Excedido por ' + formatCRC(Math.abs(restante))}
               </span>
             </div>
@@ -1915,35 +2031,159 @@
       }
 
       countEl.innerText = `${items.length} registros`;
-      listCont.innerHTML = items.slice(0, 8).map(t => {
+      listCont.innerHTML = items.slice(0, 15).map((t, idx) => {
         const esIngreso = t.accion === 'INGRESO';
         const colorIcon = esIngreso ? 'text-secondary' : (t.tipoCuenta === 'CREDITO' ? 'text-primary' : 'text-on-surface');
         const iconName = esIngreso ? 'arrow_upward' : (t.tipoCuenta === 'CREDITO' ? 'credit_card' : 'payments');
 
+        const catObj = DEFAULT_CATEGORIAS.find(c => c.key === t.categoria) || { emoji: '🏷️', nombre: t.categoria || 'Gasto' };
+
         return `
-          <div class="flex items-center justify-between p-3.5 rounded-2xl bg-surface-container border border-surface-container-high/30 hover:bg-surface-container-high transition-colors">
-            <div class="flex items-center gap-3 min-w-0">
-              <div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center shrink-0">
-                <span class="material-symbols-outlined ${colorIcon} text-[20px]">${iconName}</span>
+          <div class="flex items-center justify-between p-3 rounded-2xl bg-surface-container border border-surface-container-high/30 hover:bg-surface-container-high transition-colors">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-surface-container-high flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined ${colorIcon} text-[19px]">${iconName}</span>
               </div>
               <div class="flex flex-col min-w-0">
-                <span class="font-body-md text-body-md text-on-surface font-semibold truncate text-xs">${t.detalle || t.categoria}</span>
-                <div class="flex items-center gap-1.5 mt-0.5">
-                  <span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant font-label-md text-[10px] font-semibold">${t.usuario}</span>
-                  <span class="text-on-surface-variant text-[10px] font-label-md font-mono">• ${t.cuentaTarjeta}</span>
+                <span class="text-xs text-on-surface font-semibold truncate leading-tight">${t.detalle || t.categoria}</span>
+                <div class="flex items-center gap-1.5 mt-1 flex-wrap">
+                  <!-- Botón/Badge de Categoría para editar -->
+                  <button onclick="abrirModalEditarCategoria(${idx})" type="button" class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-surface-container-highest hover:bg-primary/20 text-primary border border-outline-variant/30 text-[10px] font-medium transition-colors cursor-pointer" title="Cambiar categoría">
+                    <span>${catObj.emoji}</span>
+                    <span class="truncate max-w-[85px]">${catObj.nombre}</span>
+                    <span class="material-symbols-outlined text-[11px] opacity-70">edit</span>
+                  </button>
+                  <span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface-variant text-[9px] font-semibold">${t.usuario}</span>
+                  <span class="text-on-surface-variant text-[9px] font-mono">• ${t.cuentaTarjeta}</span>
                 </div>
               </div>
             </div>
-            <div class="text-right shrink-0">
-              <span class="font-title-md text-title-md ${esIngreso ? 'text-secondary' : 'text-on-surface'} font-bold block text-xs font-mono">
-                ${esIngreso ? '+' : '-'}${formatCRC(t.monto)}
-              </span>
-              <span class="font-label-md text-label-md text-on-surface-variant text-[10px]">${t.fecha ? String(t.fecha).slice(0, 10) : ''}</span>
+            <div class="flex items-center gap-2 shrink-0">
+              <div class="text-right shrink-0">
+                <span class="font-bold block text-xs font-mono ${esIngreso ? 'text-secondary' : 'text-on-surface'}">
+                  ${esIngreso ? '+' : '-'}${formatCRC(t.monto)}
+                </span>
+                <span class="text-on-surface-variant text-[9px] block">${t.fecha ? String(t.fecha).slice(0, 10) : ''}</span>
+              </div>
+              <button onclick="abrirModalEditarCategoria(${idx})" type="button" class="w-7 h-7 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-primary flex items-center justify-center transition-colors cursor-pointer" title="Editar categoría">
+                <span class="material-symbols-outlined text-[15px]">edit</span>
+              </button>
             </div>
           </div>
         `;
       }).join('');
     }
+
+    // Modal de Edición de Categoría de Gasto
+    let txEnEdicionIdx = null;
+    let categoriaSeleccionadaEdicion = null;
+
+    window.abrirModalEditarCategoria = function(idx) {
+      const tx = (estadoApp.transaccionesRecientes || [])[idx];
+      if (!tx) return;
+      txEnEdicionIdx = idx;
+      categoriaSeleccionadaEdicion = tx.categoria || 'EXTRA';
+
+      const modal = document.getElementById('editCategoryModal');
+      const sheet = document.getElementById('editCategorySheet');
+
+      document.getElementById('editCatTxDetalle').innerText = tx.detalle || tx.categoria || 'Gasto';
+      document.getElementById('editCatTxMonto').innerText = formatCRC(tx.monto || 0);
+      document.getElementById('editCatTxCuenta').innerText = `${tx.usuario || ''} • ${tx.cuentaTarjeta || ''}`;
+      document.getElementById('editCatTxFecha').innerText = tx.fechaHora || tx.fecha || '';
+      
+      const catActualObj = DEFAULT_CATEGORIAS.find(c => c.key === tx.categoria) || { emoji: '🏷️', nombre: tx.categoria };
+      document.getElementById('editCatTxActual').innerText = `${catActualObj.emoji} ${catActualObj.nombre}`;
+
+      const grid = document.getElementById('editCatOptionsGrid');
+      grid.innerHTML = DEFAULT_CATEGORIAS.map(cat => {
+        const isSelected = cat.key === categoriaSeleccionadaEdicion;
+        return `
+          <button type="button" 
+                  onclick="seleccionarCategoriaParaEditar('${cat.key}')" 
+                  class="edit-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left transition-all cursor-pointer ${isSelected ? 'border-primary bg-primary/15 text-primary font-bold shadow-sm' : 'border-outline-variant/30 bg-surface-container-low text-on-surface hover:bg-surface-container-high'}" 
+                  data-cat="${cat.key}">
+            <span class="text-base">${cat.emoji}</span>
+            <div class="flex flex-col min-w-0">
+              <span class="text-xs truncate">${cat.nombre}</span>
+              <span class="text-[9px] text-on-surface-variant truncate">${formatCRC(cat.limite)}</span>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      sheet.classList.remove('translate-y-full');
+    };
+
+    window.cerrarModalEditarCategoria = function() {
+      const modal = document.getElementById('editCategoryModal');
+      const sheet = document.getElementById('editCategorySheet');
+      if (sheet) sheet.classList.add('translate-y-full');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+      txEnEdicionIdx = null;
+    };
+
+    window.seleccionarCategoriaParaEditar = function(catKey) {
+      categoriaSeleccionadaEdicion = catKey;
+      document.querySelectorAll('.edit-cat-btn').forEach(btn => {
+        const k = btn.getAttribute('data-cat');
+        if (k === catKey) {
+          btn.className = "edit-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left transition-all cursor-pointer border-primary bg-primary/15 text-primary font-bold shadow-sm";
+        } else {
+          btn.className = "edit-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left transition-all cursor-pointer border-outline-variant/30 bg-surface-container-low text-on-surface hover:bg-surface-container-high";
+        }
+      });
+    };
+
+    window.confirmarCambioCategoria = async function() {
+      if (txEnEdicionIdx === null) return;
+      const tx = (estadoApp.transaccionesRecientes || [])[txEnEdicionIdx];
+      if (!tx || !categoriaSeleccionadaEdicion) return;
+
+      const catVieja = tx.categoria;
+      const catNueva = categoriaSeleccionadaEdicion;
+
+      if (catVieja !== catNueva) {
+        tx.categoria = catNueva;
+
+        // Recalcular gastosPorCategoria si es gasto
+        if (tx.accion === 'GASTO') {
+          const monto = Number(tx.monto) || 0;
+          if (catVieja && estadoApp.gastosPorCategoria[catVieja] !== undefined) {
+            estadoApp.gastosPorCategoria[catVieja] = Math.max(0, estadoApp.gastosPorCategoria[catVieja] - monto);
+          }
+          estadoApp.gastosPorCategoria[catNueva] = (estadoApp.gastosPorCategoria[catNueva] || 0) + monto;
+        }
+
+        actualizarUI();
+
+        const catObjNueva = DEFAULT_CATEGORIAS.find(c => c.key === catNueva) || { nombre: catNueva };
+        showToast(`✅ Categoría cambiada a ${catObjNueva.nombre}`);
+
+        // Enviar actualización a Google Apps Script
+        if (scriptUrl) {
+          try {
+            fetch(scriptUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                action: 'EDIT_CATEGORY',
+                id: tx.id,
+                fechaHora: tx.fechaHora || tx.fecha,
+                detalle: tx.detalle,
+                monto: tx.monto,
+                cuentaTarjeta: tx.cuentaTarjeta,
+                categoriaAnterior: catVieja,
+                nuevaCategoria: catNueva
+              })
+            }).catch(e => console.log("Modo offline o pendiente de sync:", e));
+          } catch(e) {}
+        }
+      }
+
+      cerrarModalEditarCategoria();
+    };
 
     // Carousel & Stack Setup con Scroll Circular Infinito Nativo
     function setupCarousel() {
