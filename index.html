@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="dark" lang="es">
 <head>
   <meta charset="utf-8">
@@ -1673,14 +1673,29 @@
 
     // Inicialización al cargar la página
     window.addEventListener('DOMContentLoaded', () => {
+      // Registrar y actualizar Service Worker inmediatamente para la APK
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(e => console.log('SW registration error:', e));
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          reg.update();
+        }).catch(e => console.log('SW registration error:', e));
+
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!window.swReloaded) {
+            window.swReloaded = true;
+            window.location.reload();
+          }
+        });
       }
-      document.getElementById('config-script-url').value = scriptUrl;
-      setupCarousel();
-      renderizarPresupuestosUI();
-      actualizarUI();
-      sincronizarConGoogleSheets();
+
+      try {
+        const inputUrl = document.getElementById('config-script-url');
+        if (inputUrl) inputUrl.value = scriptUrl;
+      } catch(e) {}
+
+      try { setupCarousel(); } catch(e) { console.error("Error en setupCarousel:", e); }
+      try { renderizarPresupuestosUI(); } catch(e) { console.error("Error en renderizarPresupuestosUI:", e); }
+      try { actualizarUI(); } catch(e) { console.error("Error en actualizarUI:", e); }
+      try { sincronizarConGoogleSheets(); } catch(e) { console.error("Error en sincronizarConGoogleSheets:", e); }
     });
 
     // Cambiar de Pestaña Principal
@@ -1744,6 +1759,11 @@
 
     // Actualizar toda la interfaz con datos del backend
     function actualizarUI() {
+      const setTxt = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = val;
+      };
+
       // 1. Balances Hero
       const totalLiquido = (estadoApp.saldosBruto["BAC FIIO"] || 0) + 
                            (estadoApp.saldosBruto["BAC JONA"] || 0) + 
@@ -1752,24 +1772,24 @@
       const totalDeudaCredito = (estadoApp.saldosBruto["AMEX BAC"] || 0) + 
                                (estadoApp.saldosBruto["VISA BAC"] || 0);
 
-      document.getElementById('heroTotalAmount').innerText = formatCRC(totalLiquido);
-      document.getElementById('heroCreditDebt').innerText = formatCRC(totalDeudaCredito);
+      setTxt('heroTotalAmount', formatCRC(totalLiquido));
+      setTxt('heroCreditDebt', formatCRC(totalDeudaCredito));
 
       // 2. Tarjetas individuales
-      document.getElementById('card-0-balance').innerText = formatCRC(estadoApp.saldosBruto["BAC JONA"]);
-      document.getElementById('card-1-balance').innerText = formatCRC(estadoApp.saldosBruto["BAC FIIO"]);
-      document.getElementById('card-2-balance').innerText = formatCRC(estadoApp.saldosBruto["DAVI JONA"]);
+      setTxt('card-0-balance', formatCRC(estadoApp.saldosBruto["BAC JONA"]));
+      setTxt('card-1-balance', formatCRC(estadoApp.saldosBruto["BAC FIIO"]));
+      setTxt('card-2-balance', formatCRC(estadoApp.saldosBruto["DAVI JONA"]));
 
       const amex = estadoApp.tarjetasCredito["AMEX BAC"] || {};
       const visa = estadoApp.tarjetasCredito["VISA BAC"] || {};
 
-      document.getElementById('card-3-balance').innerText = formatCRC(estadoApp.saldosBruto["AMEX BAC"]);
-      document.getElementById('card-3-pay-now').innerText = (amex.aPagarEste24 === 0 || !amex.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(amex.aPagarEste24);
-      document.getElementById('card-3-next-cycle').innerText = formatCRC(amex.acumuladoProximoCorte || 75902);
+      setTxt('card-3-balance', formatCRC(estadoApp.saldosBruto["AMEX BAC"]));
+      setTxt('card-3-pay-now', (amex.aPagarEste24 === 0 || !amex.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(amex.aPagarEste24));
+      setTxt('card-3-next-cycle', formatCRC(amex.acumuladoProximoCorte || 75902));
 
-      document.getElementById('card-4-balance').innerText = formatCRC(estadoApp.saldosBruto["VISA BAC"]);
-      document.getElementById('card-4-pay-now').innerText = (visa.aPagarEste24 === 0 || !visa.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24);
-      document.getElementById('card-4-next-cycle').innerText = formatCRC(visa.acumuladoProximoCorte || 124780);
+      setTxt('card-4-balance', formatCRC(estadoApp.saldosBruto["VISA BAC"]));
+      setTxt('card-4-pay-now', (visa.aPagarEste24 === 0 || !visa.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24));
+      setTxt('card-4-next-cycle', formatCRC(visa.acumuladoProximoCorte || 124780));
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
       const ingresosFaltantes = 538466; // Salarios pendientes de Noviembre (Jona: 2x 160k + Fiio: 218.4k)
@@ -1783,10 +1803,7 @@
         debitoEl.className = `font-display-lg text-[20px] font-bold font-mono block leading-tight ${debitoCierreEstimado >= 0 ? 'text-secondary' : 'text-error'}`;
       }
 
-      const creditoEl = document.getElementById('projCreditoExcedente');
-      if (creditoEl) {
-        creditoEl.innerText = formatCRC(totalDeudaCredito);
-      }
+      setTxt('projCreditoExcedente', formatCRC(totalDeudaCredito));
 
       const coberturaBar = document.getElementById('projCoberturaBar');
       const coberturaPct = document.getElementById('projCoberturaPct');
@@ -1796,9 +1813,9 @@
         coberturaPct.innerText = `${pct}% cubierto`;
       }
 
-      renderizarPresupuestosUI();
-      renderizarMovimientosRecientes();
-      updateDetails(activeCardIndex);
+      try { renderizarPresupuestosUI(); } catch(e) {}
+      try { renderizarMovimientosRecientes(); } catch(e) {}
+      try { updateDetails(activeCardIndex); } catch(e) {}
     }
 
     // Cálculo de Dinero Libre No Asignado
@@ -1964,15 +1981,19 @@
       // Para un bucle circular infinito continuo sin flechas, insertamos 2 clones a la izquierda y 2 a la derecha
       const cloneLast2 = originalCards[numCards - 2].cloneNode(true);
       const cloneLast1 = originalCards[numCards - 1].cloneNode(true);
-      cloneLast2.setAttribute('data-clone', 'prev');
-      cloneLast1.setAttribute('data-clone', 'prev');
+      [cloneLast2, cloneLast1].forEach(c => {
+        c.setAttribute('data-clone', 'prev');
+        c.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+      });
       carouselWrapper.insertBefore(cloneLast1, originalCards[0]);
       carouselWrapper.insertBefore(cloneLast2, cloneLast1);
 
       const cloneFirst0 = originalCards[0].cloneNode(true);
       const cloneFirst1 = originalCards[1].cloneNode(true);
-      cloneFirst0.setAttribute('data-clone', 'next');
-      cloneFirst1.setAttribute('data-clone', 'next');
+      [cloneFirst0, cloneFirst1].forEach(c => {
+        c.setAttribute('data-clone', 'next');
+        c.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+      });
       carouselWrapper.appendChild(cloneFirst0);
       carouselWrapper.appendChild(cloneFirst1);
 
