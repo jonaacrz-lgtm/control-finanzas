@@ -274,8 +274,8 @@
               </div>
               <div class="space-y-1 relative z-10">
                 <div class="flex justify-between text-[11px] font-label-md text-on-surface-variant">
-                  <span>🔴 Pagar 24 Nov: <b class="text-rose-400" id="card-3-pay-now">₡11.750</b></span>
-                  <span>🟡 En curso: <b class="text-amber-300" id="card-3-next-cycle">₡64.152</b></span>
+                  <span>🔴 Pagar 24 Nov: <b class="text-emerald-400" id="card-3-pay-now">₡0 (Pagado)</b></span>
+                  <span>🟡 En curso: <b class="text-amber-300" id="card-3-next-cycle">₡75.902</b></span>
                 </div>
                 <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
                   <div class="h-full bg-[#38bdf8] rounded-full" style="width: 5%;"></div>
@@ -326,21 +326,15 @@
           <!-- Vista 2: Stack de Tarjetas Apiladas -->
           <div class="hidden flex flex-col space-y-2.5 pt-1 pb-4" id="stackedWrapper"></div>
 
-          <!-- Indicadores de Carrousel (Puntos) y Control Cíclico -->
-          <div class="flex items-center justify-between px-2 mt-1.5" id="carouselControls">
-            <button onclick="navigateCardCycle(-1)" class="w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors cursor-pointer" title="Tarjeta anterior (Ciclo)">
-              <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-            </button>
+          <!-- Indicadores de Carrousel (Puntos de Navegación Circular) -->
+          <div class="flex items-center justify-center px-2 mt-2" id="carouselControls">
             <div class="flex items-center gap-1.5" id="dotsContainer">
-              <span class="dot-indicator w-6 h-1.5 rounded-full bg-primary transition-all duration-300" data-dot="0"></span>
-              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300" data-dot="1"></span>
-              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300" data-dot="2"></span>
-              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300" data-dot="3"></span>
-              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300" data-dot="4"></span>
+              <span class="dot-indicator w-6 h-1.5 rounded-full bg-primary transition-all duration-300 cursor-pointer" onclick="goToCard(0)" data-dot="0"></span>
+              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(1)" data-dot="1"></span>
+              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(2)" data-dot="2"></span>
+              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(3)" data-dot="3"></span>
+              <span class="dot-indicator w-1.5 h-1.5 rounded-full bg-surface-variant transition-all duration-300 cursor-pointer" onclick="goToCard(4)" data-dot="4"></span>
             </div>
-            <button onclick="navigateCardCycle(1)" class="w-8 h-8 rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface flex items-center justify-center transition-colors cursor-pointer" title="Siguiente tarjeta (Ciclo)">
-              <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-            </button>
           </div>
         </div>
 
@@ -610,7 +604,7 @@
             </div>
             <div>
               <span class="text-[11px] font-label-md text-emerald-300 font-semibold tracking-wide uppercase block">Dinero Libre No Asignado</span>
-              <span class="font-display-lg text-[22px] font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡20.000</span>
+              <span class="font-display-lg text-[22px] font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡29.465</span>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
@@ -621,7 +615,7 @@
           </div>
         </div>
         <p class="text-[11px] text-slate-300 mt-2 leading-relaxed border-t border-emerald-500/20 pt-2" id="unallocatedExplain">
-          💡 Tienes <b class="text-emerald-300 font-mono" id="unallocatedExplainAmount">₡20.000</b> de ingresos adicionales ingresados (Davivienda) sin asignar a ningún sobre. Puedes repartirlos en tus categorías o dejarlos como ahorro disponible.
+          💡 Tienes <b class="text-emerald-300 font-mono" id="unallocatedExplainAmount">₡29.465</b> de saldo libre (₡20.000 de ingreso extra en Davivienda + ₡9.465 de remanente mensual). Puedes repartirlos en tus categorías o dejarlos como ahorro.
         </p>
       </section>
 
@@ -1497,16 +1491,16 @@
       <!-- Live Budget Summary Banner con Dinero Libre -->
       <div class="bg-surface-container-low rounded-xl p-space-sm grid grid-cols-3 gap-2 shrink-0 shadow-inner border border-surface-container-high/40 text-center">
         <div class="flex flex-col">
-          <span class="font-label-md text-label-md text-on-surface-variant text-[10px]">Asignado</span>
-          <span class="font-title-md text-title-md text-primary font-bold font-mono text-xs" id="modal-total-display">₡1.440.324</span>
+          <span class="font-label-md text-label-md text-on-surface-variant text-[10px]">Asignado Sobres</span>
+          <span class="font-title-md text-title-md text-primary font-bold font-mono text-xs" id="modal-total-display">₡898.281</span>
         </div>
         <div class="flex flex-col border-x border-surface-container-high/60 px-1">
-          <span class="font-label-md text-label-md text-on-surface-variant text-[10px]">Ingresos Totales</span>
-          <span class="font-title-md text-title-md text-secondary font-semibold font-mono text-xs" id="modal-balance-display">₡1.196.932</span>
+          <span class="font-label-md text-label-md text-on-surface-variant text-[10px]">Compromisos &amp; Deuda</span>
+          <span class="font-title-md text-title-md text-slate-300 font-semibold font-mono text-xs" id="modal-balance-display">₡966.039</span>
         </div>
         <div class="flex flex-col">
-          <span class="font-label-md text-label-md text-emerald-300 text-[10px] font-semibold">Sin Asignar</span>
-          <span class="font-title-md text-title-md text-emerald-300 font-bold font-mono text-xs" id="modal-unallocated-display">₡20.000</span>
+          <span class="font-label-md text-label-md text-emerald-300 text-[10px] font-semibold">Sin Asignar (Libre)</span>
+          <span class="font-title-md text-title-md text-emerald-300 font-bold font-mono text-xs" id="modal-unallocated-display">₡29.465</span>
         </div>
       </div>
 
@@ -1636,8 +1630,9 @@
       },
       tarjetasCredito: {
         "VISA BAC": { totalPendiente: 124780, aPagarEste24: 0, acumuladoProximoCorte: 124780 },
-        "AMEX BAC": { totalPendiente: 75902, aPagarEste24: 11750, acumuladoProximoCorte: 64152 }
+        "AMEX BAC": { totalPendiente: 75902, aPagarEste24: 0, acumuladoProximoCorte: 75902 }
       },
+      presupuestoPorAsignar: 9465,
       gastosPorCategoria: {
         "DIARIO/COMPRAS": 125758,
         "GASOLINA": 92532,
@@ -1769,12 +1764,12 @@
       const visa = estadoApp.tarjetasCredito["VISA BAC"] || {};
 
       document.getElementById('card-3-balance').innerText = formatCRC(estadoApp.saldosBruto["AMEX BAC"]);
-      document.getElementById('card-3-pay-now').innerText = formatCRC(amex.aPagarEste24 || 11750);
-      document.getElementById('card-3-next-cycle').innerText = formatCRC(amex.acumuladoProximoCorte || 64152);
+      document.getElementById('card-3-pay-now').innerText = (amex.aPagarEste24 === 0 || !amex.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(amex.aPagarEste24);
+      document.getElementById('card-3-next-cycle').innerText = formatCRC(amex.acumuladoProximoCorte || 75902);
 
       document.getElementById('card-4-balance').innerText = formatCRC(estadoApp.saldosBruto["VISA BAC"]);
-      document.getElementById('card-4-pay-now').innerText = (visa.aPagarEste24 === 0) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24);
-      document.getElementById('card-4-next-cycle').innerText = formatCRC(visa.acumuladoProximoCorte || 108317);
+      document.getElementById('card-4-pay-now').innerText = (visa.aPagarEste24 === 0 || !visa.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24);
+      document.getElementById('card-4-next-cycle').innerText = formatCRC(visa.acumuladoProximoCorte || 124780);
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
       const ingresosFaltantes = 538466; // Salarios pendientes de Noviembre (Jona: 2x 160k + Fiio: 218.4k)
@@ -1808,18 +1803,30 @@
 
     // Cálculo de Dinero Libre No Asignado
     function calcularSaldoLibrePresupuesto() {
-      const baseIngresosFijos = 1196932;
+      // 1. Remanente base de GENERAL 2.0 (Celda F7: PRESUPUESTO X ASIGNAR)
+      const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
+
+      // 2. Ingresos extras no contemplados en salarios fijos (ej: venta deck apple ₡20.000 en Davivienda)
       const ingresosExtras = (estadoApp.transaccionesRecientes || [])
-        .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena'))
+        .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
         .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
 
-      const totalIngresos = (estadoApp.totalIngresosRegistrados && estadoApp.totalIngresosRegistrados > baseIngresosFijos)
-        ? estadoApp.totalIngresosRegistrados
-        : (baseIngresosFijos + ingresosExtras);
+      // 3. Diferencia entre lo presupuestado actualmente y el presupuesto base
+      const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
+      const actualCategoriasSum = CATEGORIAS_CONFIG.reduce((acc, c) => acc + (Number(c.limite) || 0), 0);
+      const deltaAsignado = actualCategoriasSum - baseCategoriasSum;
 
-      const totalAsignado = CATEGORIAS_CONFIG.reduce((acc, c) => acc + (Number(c.limite) || 0), 0);
-      const saldoLibre = Math.max(0, totalIngresos - totalAsignado);
-      return { totalIngresos, totalAsignado, saldoLibre, ingresosExtras };
+      // Saldo libre real disponible
+      const saldoLibre = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
+      const compromisosFijos = 966039; // Casa (315k) + Conape (110.8k) + Teléfonos (30.4k) + Streaming/Salud (32k) + Pago Crédito ya cancelado (477.8k)
+
+      return {
+        saldoLibre,
+        basePorAsignar,
+        ingresosExtras,
+        totalAsignado: actualCategoriasSum,
+        compromisosFijos
+      };
     }
 
     // Renderizar Categorías de Presupuesto
@@ -1896,6 +1903,8 @@
       if (unallocAmountEl) unallocAmountEl.innerText = formatCRC(info.saldoLibre);
       if (unallocExplainEl) unallocExplainEl.innerText = formatCRC(info.saldoLibre);
     }
+      if (unallocExplainEl) unallocExplainEl.innerText = formatCRC(info.saldoLibre);
+    }
 
     function renderizarMovimientosRecientes() {
       const listCont = document.getElementById('homeRecentList');
@@ -1942,31 +1951,108 @@
       }).join('');
     }
 
-    // Carousel & Stack Setup
+    // Carousel & Stack Setup con Scroll Circular Infinito Nativo
     function setupCarousel() {
       const modeSlideBtn = document.getElementById('modeSlideBtn');
       const modeStackBtn = document.getElementById('modeStackBtn');
       const carouselWrapper = document.getElementById('carouselWrapper');
       const stackedWrapper = document.getElementById('stackedWrapper');
       const dotsContainer = document.getElementById('dotsContainer');
-      const cardItems = carouselWrapper.querySelectorAll('.card-item');
+      const originalCards = Array.from(carouselWrapper.querySelectorAll('.card-item'));
+      const numCards = originalCards.length;
 
-      cardItems.forEach((card, idx) => {
+      // Para un bucle circular infinito continuo sin flechas, insertamos 2 clones a la izquierda y 2 a la derecha
+      const cloneLast2 = originalCards[numCards - 2].cloneNode(true);
+      const cloneLast1 = originalCards[numCards - 1].cloneNode(true);
+      cloneLast2.setAttribute('data-clone', 'prev');
+      cloneLast1.setAttribute('data-clone', 'prev');
+      carouselWrapper.insertBefore(cloneLast1, originalCards[0]);
+      carouselWrapper.insertBefore(cloneLast2, cloneLast1);
+
+      const cloneFirst0 = originalCards[0].cloneNode(true);
+      const cloneFirst1 = originalCards[1].cloneNode(true);
+      cloneFirst0.setAttribute('data-clone', 'next');
+      cloneFirst1.setAttribute('data-clone', 'next');
+      carouselWrapper.appendChild(cloneFirst0);
+      carouselWrapper.appendChild(cloneFirst1);
+
+      const allItems = Array.from(carouselWrapper.querySelectorAll('.card-item'));
+
+      function getStepWidth() {
+        const first = allItems[0];
+        return first ? first.offsetWidth + 16 : 336;
+      }
+
+      let isJumping = false;
+      function setInitialPosition() {
+        const step = getStepWidth();
+        carouselWrapper.style.scrollBehavior = 'auto';
+        carouselWrapper.scrollLeft = 2 * step;
+        carouselWrapper.style.scrollBehavior = '';
+      }
+
+      // Posicionar en la tarjeta 0 real tras render inicial
+      setTimeout(setInitialPosition, 60);
+
+      // Clic en cualquier tarjeta para seleccionarla y centrarla
+      allItems.forEach((card, domIdx) => {
+        const realIdx = ((domIdx - 2) % numCards + numCards) % numCards;
         card.addEventListener('click', () => {
-          updateDetails(idx);
+          updateDetails(realIdx);
           card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         });
       });
 
+      // Detección de scroll y rebote circular imperceptible
+      let scrollTimer = null;
       carouselWrapper.addEventListener('scroll', () => {
-        const scrollPos = carouselWrapper.scrollLeft;
-        const cardWidth = cardItems[0].offsetWidth + 16;
-        const newIndex = Math.min(Math.round(scrollPos / cardWidth), CARDS_DATA.length - 1);
-        if (newIndex !== activeCardIndex && newIndex >= 0) {
-          updateDetails(newIndex);
+        if (isJumping) return;
+
+        const step = getStepWidth();
+        const domIndex = Math.round(carouselWrapper.scrollLeft / step);
+        const realIdx = ((domIndex - 2) % numCards + numCards) % numCards;
+
+        if (realIdx !== activeCardIndex && realIdx >= 0 && realIdx < numCards) {
+          updateDetails(realIdx);
         }
+
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          const currentStep = getStepWidth();
+          const currentDomIdx = Math.round(carouselWrapper.scrollLeft / currentStep);
+
+          if (currentDomIdx >= numCards + 2) {
+            // Llegó a los clones de la derecha -> salto invisible a las reales
+            isJumping = true;
+            carouselWrapper.style.scrollBehavior = 'auto';
+            carouselWrapper.scrollLeft -= numCards * currentStep;
+            setTimeout(() => {
+              carouselWrapper.style.scrollBehavior = '';
+              isJumping = false;
+            }, 40);
+          } else if (currentDomIdx < 2) {
+            // Llegó a los clones de la izquierda -> salto invisible a las reales
+            isJumping = true;
+            carouselWrapper.style.scrollBehavior = 'auto';
+            carouselWrapper.scrollLeft += numCards * currentStep;
+            setTimeout(() => {
+              carouselWrapper.style.scrollBehavior = '';
+              isJumping = false;
+            }, 40);
+          }
+        }, 120);
       }, { passive: true });
 
+      // Clic en indicadores (puntos)
+      window.goToCard = function(targetIdx) {
+        updateDetails(targetIdx);
+        const targetDom = allItems[targetIdx + 2];
+        if (targetDom) {
+          targetDom.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      };
+
+      // Modos Slide / Stack
       modeSlideBtn.addEventListener('click', () => {
         if (!isStacked) return;
         isStacked = false;
@@ -1975,8 +2061,8 @@
         stackedWrapper.classList.add('hidden');
         carouselWrapper.classList.remove('hidden');
         dotsContainer.classList.remove('hidden');
-        if (cardItems[activeCardIndex]) {
-          cardItems[activeCardIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        if (allItems[activeCardIndex + 2]) {
+          allItems[activeCardIndex + 2].scrollIntoView({ behavior: 'smooth', inline: 'center' });
         }
       });
 
@@ -1987,7 +2073,7 @@
         modeSlideBtn.className = "px-3 py-1.5 rounded-full font-label-md text-label-md transition-all duration-300 text-on-surface-variant hover:text-on-surface flex items-center gap-1.5 focus:outline-none";
         
         stackedWrapper.innerHTML = '';
-        cardItems.forEach((cardNode, idx) => {
+        originalCards.forEach((cardNode, idx) => {
           const clone = cardNode.cloneNode(true);
           clone.classList.remove('shrink-0', 'snap-center', 'w-[84vw]');
           clone.classList.add('w-full', 'transition-transform', 'duration-300', 'shadow-2xl');
@@ -2011,16 +2097,9 @@
       });
     }
 
-    // Navegación Cíclica Infinita de Tarjetas
+    // Navegación Cíclica de Tarjetas
     window.navigateCardCycle = function(direction) {
-      const carouselWrapper = document.getElementById('carouselWrapper');
-      const cardItems = carouselWrapper.querySelectorAll('.card-item');
-      if (!cardItems || cardItems.length === 0) return;
-      let nextIndex = (activeCardIndex + direction + CARDS_DATA.length) % CARDS_DATA.length;
-      updateDetails(nextIndex);
-      if (!isStacked && cardItems[nextIndex]) {
-        cardItems[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
+      goToCard((activeCardIndex + direction + CARDS_DATA.length) % CARDS_DATA.length);
     };
 
     // Cálculo y Desglose de Gastos del Mes por Cuenta
@@ -2388,8 +2467,13 @@
           const inp = document.getElementById(`budget-input-${i}`);
           if (inp) sumActual += parseFloat(inp.value) || 0;
         });
-        const info = calcularSaldoLibrePresupuesto();
-        const libreActual = Math.max(0, info.totalIngresos - sumActual);
+        const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
+        const deltaAsignado = sumActual - baseCategoriasSum;
+        const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
+        const ingresosExtras = (estadoApp.transaccionesRecientes || [])
+          .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
+          .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
+        const libreActual = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
         if (libreActual > 0) {
           quickAddBudget(extraIdx, libreActual);
           showToast(`✅ ${formatCRC(libreActual)} asignados a Extra/Colchón`);
@@ -2416,18 +2500,24 @@
         if (inp) sum += parseFloat(inp.value) || 0;
       });
 
-      const info = calcularSaldoLibrePresupuesto();
-      const sinAsignar = Math.max(0, info.totalIngresos - sum);
+      const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
+      const deltaAsignado = sum - baseCategoriasSum;
+      const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
+      const ingresosExtras = (estadoApp.transaccionesRecientes || [])
+        .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
+        .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
+
+      const libreActual = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
 
       const totalEl = document.getElementById('modal-total-display');
       const balanceEl = document.getElementById('modal-balance-display');
       const unallocatedEl = document.getElementById('modal-unallocated-display');
 
       if (totalEl) totalEl.innerText = formatCRC(sum);
-      if (balanceEl) balanceEl.innerText = formatCRC(info.totalIngresos);
+      if (balanceEl) balanceEl.innerText = formatCRC(966039);
       if (unallocatedEl) {
-        unallocatedEl.innerText = formatCRC(sinAsignar);
-        unallocatedEl.className = `font-title-md text-title-md font-bold font-mono text-xs ${sinAsignar > 0 ? 'text-emerald-300' : 'text-slate-400'}`;
+        unallocatedEl.innerText = formatCRC(libreActual);
+        unallocatedEl.className = `font-title-md text-title-md font-bold font-mono text-xs ${libreActual > 0 ? 'text-emerald-300' : 'text-slate-400'}`;
       }
     }
 
@@ -2467,6 +2557,9 @@
           estadoApp.saldosMesPasado = data.saldosMesPasado || estadoApp.saldosMesPasado;
           estadoApp.tarjetasCredito = data.tarjetasCredito || estadoApp.tarjetasCredito;
           estadoApp.gastosPorCategoria = data.gastosPorCategoria || estadoApp.gastosPorCategoria;
+          if (data.presupuestoPorAsignar !== undefined) {
+            estadoApp.presupuestoPorAsignar = data.presupuestoPorAsignar;
+          }
           if (data.transaccionesRecientes && data.transaccionesRecientes.length > 0) {
             estadoApp.transaccionesRecientes = data.transaccionesRecientes;
           }
