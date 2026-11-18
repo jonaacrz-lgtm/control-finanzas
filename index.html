@@ -1673,18 +1673,9 @@
 
     // Inicialización al cargar la página
     window.addEventListener('DOMContentLoaded', () => {
-      // Registrar y actualizar Service Worker inmediatamente para la APK
+      // Registrar Service Worker de forma segura y sin recargas
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').then((reg) => {
-          reg.update();
-        }).catch(e => console.log('SW registration error:', e));
-
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-          if (!window.swReloaded) {
-            window.swReloaded = true;
-            window.location.reload();
-          }
-        });
+        navigator.serviceWorker.register('./sw.js').catch(e => console.log('SW registration error:', e));
       }
 
       try {
@@ -1918,8 +1909,6 @@
       const unallocAmountEl = document.getElementById('unallocatedAmountDisplay');
       const unallocExplainEl = document.getElementById('unallocatedExplainAmount');
       if (unallocAmountEl) unallocAmountEl.innerText = formatCRC(info.saldoLibre);
-      if (unallocExplainEl) unallocExplainEl.innerText = formatCRC(info.saldoLibre);
-    }
       if (unallocExplainEl) unallocExplainEl.innerText = formatCRC(info.saldoLibre);
     }
 
