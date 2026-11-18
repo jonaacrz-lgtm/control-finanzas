@@ -604,7 +604,7 @@
             </div>
             <div>
               <span class="text-[11px] font-label-md text-emerald-300 font-semibold tracking-wide uppercase block">Dinero Libre No Asignado</span>
-              <span class="font-display-lg text-[22px] font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡29.465</span>
+              <span class="font-display-lg text-[22px] font-bold text-on-surface font-mono block leading-tight" id="unallocatedAmountDisplay">₡20.000</span>
             </div>
           </div>
           <div class="flex items-center gap-1.5">
@@ -614,9 +614,6 @@
             </button>
           </div>
         </div>
-        <p class="text-[11px] text-slate-300 mt-2 leading-relaxed border-t border-emerald-500/20 pt-2" id="unallocatedExplain">
-          💡 Tienes <b class="text-emerald-300 font-mono" id="unallocatedExplainAmount">₡29.465</b> de saldo libre (₡20.000 de ingreso extra en Davivienda + ₡9.465 de remanente mensual). Puedes repartirlos en tus categorías o dejarlos como ahorro.
-        </p>
       </section>
 
       <!-- Lista de Categorías de Presupuesto -->
@@ -1472,7 +1469,7 @@
   </div>
 
   <!-- ==================== DRAWER MODAL: REASIGNAR PRESUPUESTOS ==================== -->
-  <div class="fixed inset-0 z-50 flex flex-col justify-end bg-surface-container-lowest/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300" id="allocation-modal">
+  <div class="fixed inset-0 z-50 flex flex-col justify-end bg-surface-container-lowest/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300" id="allocation-modal" onclick="if (event.target === this) closeBudgetModal()">
     <div class="w-full max-h-[88vh] bg-surface-container rounded-t-3xl p-space-md flex flex-col gap-space-sm transform translate-y-full transition-transform duration-300 overflow-hidden shadow-2xl" id="allocation-sheet">
       
       <div class="flex flex-col items-center gap-1.5 shrink-0">
@@ -1500,7 +1497,7 @@
         </div>
         <div class="flex flex-col">
           <span class="font-label-md text-label-md text-emerald-300 text-[10px] font-semibold">Sin Asignar (Libre)</span>
-          <span class="font-title-md text-title-md text-emerald-300 font-bold font-mono text-xs" id="modal-unallocated-display">₡29.465</span>
+          <span class="font-title-md text-title-md text-emerald-300 font-bold font-mono text-xs" id="modal-unallocated-display">₡20.000</span>
         </div>
       </div>
 
@@ -1811,27 +1808,20 @@
 
     // Cálculo de Dinero Libre No Asignado
     function calcularSaldoLibrePresupuesto() {
-      // 1. Remanente base de GENERAL 2.0 (Celda F7: PRESUPUESTO X ASIGNAR)
-      const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
+      // 1. Ingreso imprevisto no contemplado en presupuestos base (Venta deck apple ₡20.000 en Davivienda)
+      const INGRESO_EXTRA_BASE = 20000;
 
-      // 2. Ingresos extras no contemplados en salarios fijos (ej: venta deck apple ₡20.000 en Davivienda)
-      const ingresosExtras = (estadoApp.transaccionesRecientes || [])
-        .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
-        .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
-
-      // 3. Diferencia entre lo presupuestado actualmente y el presupuesto base
+      // 2. Diferencia entre lo asignado en sobres y la base
       const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
       const actualCategoriasSum = CATEGORIAS_CONFIG.reduce((acc, c) => acc + (Number(c.limite) || 0), 0);
-      const deltaAsignado = actualCategoriasSum - baseCategoriasSum;
+      const deltaAsignado = Math.max(0, actualCategoriasSum - baseCategoriasSum);
 
       // Saldo libre real disponible
-      const saldoLibre = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
-      const compromisosFijos = 966039; // Casa (315k) + Conape (110.8k) + Teléfonos (30.4k) + Streaming/Salud (32k) + Pago Crédito ya cancelado (477.8k)
+      const saldoLibre = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
+      const compromisosFijos = 966039; // Casa + Conape + Teléfonos + Streaming/Salud + Pagos fijos
 
       return {
         saldoLibre,
-        basePorAsignar,
-        ingresosExtras,
         totalAsignado: actualCategoriasSum,
         compromisosFijos
       };
@@ -1907,9 +1897,7 @@
       // Actualizar Banner de Dinero Libre No Asignado
       const info = calcularSaldoLibrePresupuesto();
       const unallocAmountEl = document.getElementById('unallocatedAmountDisplay');
-      const unallocExplainEl = document.getElementById('unallocatedExplainAmount');
       if (unallocAmountEl) unallocAmountEl.innerText = formatCRC(info.saldoLibre);
-      if (unallocExplainEl) unallocExplainEl.innerText = formatCRC(info.saldoLibre);
     }
 
     function renderizarMovimientosRecientes() {
@@ -2453,10 +2441,27 @@
     };
 
     window.closeBudgetModal = function() {
+      // Auto-guardar cualquier cambio al salir del modal
+      let changed = false;
+      CATEGORIAS_CONFIG.forEach((c, idx) => {
+        const inp = document.getElementById(`budget-input-${idx}`);
+        if (inp) {
+          const val = parseFloat(inp.value);
+          if (!isNaN(val) && val !== c.limite) {
+            c.limite = val;
+            changed = true;
+          }
+        }
+      });
+      if (changed) {
+        localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      }
+      renderizarPresupuestosUI();
+
       const modal = document.getElementById('allocation-modal');
       const sheet = document.getElementById('allocation-sheet');
-      sheet.classList.add('translate-y-full');
-      modal.classList.add('opacity-0', 'pointer-events-none');
+      if (sheet) sheet.classList.add('translate-y-full');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
     };
 
     window.quickAddBudget = function(idx, amount) {
@@ -2478,12 +2483,9 @@
           if (inp) sumActual += parseFloat(inp.value) || 0;
         });
         const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
-        const deltaAsignado = sumActual - baseCategoriasSum;
-        const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
-        const ingresosExtras = (estadoApp.transaccionesRecientes || [])
-          .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
-          .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
-        const libreActual = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
+        const deltaAsignado = Math.max(0, sumActual - baseCategoriasSum);
+        const INGRESO_EXTRA_BASE = 20000;
+        const libreActual = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
         if (libreActual > 0) {
           quickAddBudget(extraIdx, libreActual);
           showToast(`✅ ${formatCRC(libreActual)} asignados a Extra/Colchón`);
@@ -2494,13 +2496,23 @@
     window.syncBudgetSlider = function(idx, val) {
       const slider = document.getElementById(`budget-slider-${idx}`);
       if (slider) slider.value = val;
+      if (CATEGORIAS_CONFIG[idx]) {
+        CATEGORIAS_CONFIG[idx].limite = parseFloat(val) || 0;
+        localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      }
       recalcularModalTotal();
+      renderizarPresupuestosUI();
     };
 
     window.syncBudgetInput = function(idx, val) {
       const input = document.getElementById(`budget-input-${idx}`);
       if (input) input.value = val;
+      if (CATEGORIAS_CONFIG[idx]) {
+        CATEGORIAS_CONFIG[idx].limite = parseFloat(val) || 0;
+        localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      }
       recalcularModalTotal();
+      renderizarPresupuestosUI();
     };
 
     function recalcularModalTotal() {
@@ -2511,13 +2523,9 @@
       });
 
       const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
-      const deltaAsignado = sum - baseCategoriasSum;
-      const basePorAsignar = Number(estadoApp.presupuestoPorAsignar || 9465);
-      const ingresosExtras = (estadoApp.transaccionesRecientes || [])
-        .filter(t => t.accion === 'INGRESO' && !t.detalle?.toLowerCase().includes('nómina') && !t.detalle?.toLowerCase().includes('nomina') && !t.detalle?.toLowerCase().includes('quincena') && !t.detalle?.toLowerCase().includes('salario'))
-        .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
-
-      const libreActual = Math.max(0, (basePorAsignar + ingresosExtras) - deltaAsignado);
+      const deltaAsignado = Math.max(0, sum - baseCategoriasSum);
+      const INGRESO_EXTRA_BASE = 20000;
+      const libreActual = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
 
       const totalEl = document.getElementById('modal-total-display');
       const balanceEl = document.getElementById('modal-balance-display');
@@ -2532,15 +2540,6 @@
     }
 
     window.guardarCambiosPresupuesto = function() {
-      CATEGORIAS_CONFIG.forEach((c, idx) => {
-        const inp = document.getElementById(`budget-input-${idx}`);
-        if (inp) {
-          c.limite = parseFloat(inp.value) || c.limite;
-        }
-      });
-
-      localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
-      renderizarPresupuestosUI();
       closeBudgetModal();
       showToast("✅ Presupuestos actualizados con éxito");
     };
