@@ -589,7 +589,7 @@
       <section class="flex flex-col bg-surface-container-low rounded-2xl p-4 shadow-xl relative overflow-hidden border border-surface-container-high/60 mt-4 space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-1.5 bg-surface-container-high px-2.5 py-1 rounded-full">
-            <span class="text-xs font-semibold text-primary tracking-wide">Noviembre 2026</span>
+            <span class="text-xs font-semibold text-primary tracking-wide" id="presupuestosMesBadge">Noviembre 2026</span>
           </div>
           <button onclick="openBudgetModal()" class="flex items-center gap-1 bg-surface-container-highest hover:bg-surface-bright text-primary text-xs font-semibold px-2.5 py-1 rounded-full transition-all duration-200 focus:outline-none shadow-sm cursor-pointer" id="open-config-btn">
             <span class="material-symbols-outlined text-[15px] text-primary">tune</span>
@@ -993,7 +993,7 @@
       <section class="flex flex-col gap-space-sm mt-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-space-sm bg-surface-container-low px-space-md py-space-xs rounded-full shadow-sm">
-            <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">Noviembre 2026</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold" id="ingresosMesBadge">Noviembre 2026</span>
           </div>
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-semibold shadow-sm">
             <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
@@ -1014,7 +1014,7 @@
               <span class="font-label-md text-label-md px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-semibold">2 Nóminas Activas</span>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="font-display-lg text-[34px] text-primary tracking-tight font-bold">₡1.196.932</span>
+              <span class="font-display-lg text-[34px] text-primary tracking-tight font-bold font-mono" id="ingresosTotalEsperadoDisplay">₡1.196.932</span>
               <span class="text-on-surface-variant font-label-md text-label-md">esperados</span>
             </div>
           </div>
@@ -1024,19 +1024,19 @@
             <div class="flex justify-between items-center text-on-surface-variant font-label-md text-label-md">
               <div class="flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
-                <span class="text-on-surface font-medium">Recibido: ₡658.466</span>
+                <span class="text-on-surface font-medium" id="ingresosRecibidoDisplay">Recibido: ₡818.466</span>
               </div>
-              <span class="font-headline-sm text-headline-sm text-secondary font-semibold">55%</span>
+              <span class="font-headline-sm text-headline-sm text-secondary font-semibold font-mono" id="ingresosPctDisplay">68%</span>
             </div>
             <div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden flex p-0.5">
-              <div class="h-full bg-secondary rounded-full shadow-[0_0_12px_rgba(159,209,188,0.45)] transition-all duration-700 ease-out" style="width: 55%;"></div>
+              <div class="h-full bg-secondary rounded-full shadow-[0_0_12px_rgba(159,209,188,0.45)] transition-all duration-700 ease-out" id="ingresosProgressBar" style="width: 68%;"></div>
             </div>
             <div class="flex justify-between items-center pt-1 font-label-md text-label-md text-on-surface-variant">
               <span class="flex items-center gap-1">
                 <span class="material-symbols-outlined text-[14px] text-tertiary">hourglass_top</span>
-                Pendiente por cobrar: <strong class="text-tertiary ml-0.5">₡538.466</strong>
+                Pendiente por cobrar: <strong class="text-tertiary ml-0.5 font-mono" id="ingresosPendienteDisplay">₡378.466</strong>
               </span>
-              <span class="text-on-surface-variant/80">2 Jona • 1 Fiio</span>
+              <span class="text-on-surface-variant/80" id="ingresosPendienteCountDisplay">1 Jona • 1 Fiio</span>
             </div>
           </div>
         </div>
@@ -1059,45 +1059,11 @@
                 <p class="font-label-md text-label-md text-on-surface-variant">Nómina semanal (Cada Jueves) • BAC</p>
               </div>
             </div>
-            <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-md text-xs font-semibold">₡760.000 mes</span>
+            <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-md text-xs font-semibold font-mono" id="jonaTotalMesBadge">₡760.000 mes</span>
           </div>
 
           <div class="space-y-2" id="jonaScheduleList">
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-                <span>Jueves 5 Nov (Salario 1 Jona)</span>
-              </div>
-              <span class="font-mono font-bold text-white">₡160.000</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-                <span>Jueves 5 Nov (Comisión Octubre)</span>
-              </div>
-              <span class="font-mono font-bold text-white">₡120.000</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-                <span>Jueves 12 Nov (Salario 2 Jona)</span>
-              </div>
-              <span class="font-mono font-bold text-white">₡160.000</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs opacity-75">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-tertiary">pending</span>
-                <span>Jueves 19 Nov (Salario 3 Jona)</span>
-              </div>
-              <span class="font-mono font-bold text-amber-300">₡160.000</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs opacity-75">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-tertiary">pending</span>
-                <span>Jueves 26 Nov (Salario 4 Jona)</span>
-              </div>
-              <span class="font-mono font-bold text-amber-300">₡160.000</span>
-            </div>
+            <!-- Renderizado dinámicamente por renderizarIngresosUI() -->
           </div>
         </article>
 
@@ -1111,24 +1077,11 @@
                 <p class="font-label-md text-label-md text-on-surface-variant">Quincenal (Viernes previo si es fin de semana)</p>
               </div>
             </div>
-            <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-md text-xs font-semibold">₡436.932 mes</span>
+            <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-md text-xs font-semibold font-mono" id="fiioTotalMesBadge">₡436.932 mes</span>
           </div>
 
           <div class="space-y-2" id="fiioScheduleList">
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-                <span>Viernes 14 Nov (1era Quincena • Adelanto)</span>
-              </div>
-              <span class="font-mono font-bold text-white">₡218.466</span>
-            </div>
-            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs opacity-75">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-tertiary">pending</span>
-                <span>Lunes 30 Nov (2da Quincena • Fin de Mes)</span>
-              </div>
-              <span class="font-mono font-bold text-amber-300">₡218.466</span>
-            </div>
+            <!-- Renderizado dinámicamente por renderizarIngresosUI() -->
           </div>
         </article>
       </section>
@@ -1781,12 +1734,247 @@
       return '₡' + Number(num || 0).toLocaleString('es-CR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     }
 
+    // Obtener clave del mes actual (yyyy-MM) y nombre legible (ej: "Noviembre 2026")
+    function obtenerInfoMesActual() {
+      const hoy = new Date();
+      const anio = hoy.getFullYear();
+      const mesIdx = hoy.getMonth(); // 0..11
+      const mesNum = String(mesIdx + 1).padStart(2, '0');
+      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+      return {
+        key: `${anio}-${mesNum}`,
+        nombre: `${meses[mesIdx]} ${anio}`,
+        anio,
+        mesIdx
+      };
+    }
+
+    const DEFAULT_SALARIOS_NOV = [
+      { id: 'jona-1', persona: 'Jona', label: 'Jueves 5 Nov (Salario 1 Jona)', monto: 160000, cuenta: 'BAC JONA', pagado: true },
+      { id: 'jona-com', persona: 'Jona', label: 'Jueves 5 Nov (Comisión Octubre)', monto: 120000, cuenta: 'BAC JONA', pagado: true },
+      { id: 'jona-2', persona: 'Jona', label: 'Jueves 12 Nov (Salario 2 Jona)', monto: 160000, cuenta: 'BAC JONA', pagado: true },
+      { id: 'jona-3', persona: 'Jona', label: 'Jueves 19 Nov (Salario 3 Jona)', monto: 160000, cuenta: 'BAC JONA', pagado: true },
+      { id: 'jona-4', persona: 'Jona', label: 'Jueves 26 Nov (Salario 4 Jona)', monto: 160000, cuenta: 'BAC JONA', pagado: false },
+      { id: 'fiio-1', persona: 'Fiio', label: 'Viernes 14 Nov (1era Quincena • Adelanto)', monto: 218466, cuenta: 'BAC FIIO', pagado: true },
+      { id: 'fiio-2', persona: 'Fiio', label: 'Lunes 30 Nov (2da Quincena • Fin de Mes)', monto: 218466, cuenta: 'BAC FIIO', pagado: false }
+    ];
+
+    function generarSalariosParaMes(anio, mesIdx) {
+      const mesesCortos = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      const mesCorto = mesesCortos[mesIdx];
+      const diasMes = new Date(anio, mesIdx + 1, 0).getDate();
+      const lista = [];
+      let jonaCount = 0;
+
+      // Todos los jueves del mes para Jona (₡160.000 c/u)
+      for (let d = 1; d <= diasMes; d++) {
+        const dt = new Date(anio, mesIdx, d);
+        if (dt.getDay() === 4) {
+          jonaCount++;
+          lista.push({
+            id: `jona-${anio}-${mesIdx + 1}-${jonaCount}`,
+            persona: 'Jona',
+            label: `Jueves ${d} ${mesCorto} (Salario ${jonaCount} Jona)`,
+            monto: 160000,
+            cuenta: 'BAC JONA',
+            pagado: false
+          });
+        }
+      }
+
+      // Quincenas para Fiio (₡218.466 c/u)
+      lista.push({
+        id: `fiio-${anio}-${mesIdx + 1}-1`,
+        persona: 'Fiio',
+        label: `15 ${mesCorto} (1era Quincena Fiio)`,
+        monto: 218466,
+        cuenta: 'BAC FIIO',
+        pagado: false
+      });
+      lista.push({
+        id: `fiio-${anio}-${mesIdx + 1}-2`,
+        persona: 'Fiio',
+        label: `${diasMes} ${mesCorto} (2da Quincena Fiio)`,
+        monto: 218466,
+        cuenta: 'BAC FIIO',
+        pagado: false
+      });
+
+      return lista;
+    }
+
+    let SALARIOS_MES = [];
+
+    function inicializarSalariosYCambioDeMes() {
+      const infoMes = obtenerInfoMesActual();
+      const mesGuardado = localStorage.getItem('cc_active_month');
+
+      // Actualizar etiquetas del mes en UI
+      const pBadge = document.getElementById('presupuestosMesBadge');
+      const iBadge = document.getElementById('ingresosMesBadge');
+      if (pBadge) pBadge.innerText = infoMes.nombre;
+      if (iBadge) iBadge.innerText = infoMes.nombre;
+
+      // Verificar si cambió el mes (día 1 del nuevo mes)
+      if (mesGuardado && mesGuardado !== infoMes.key) {
+        // 1. Poner los presupuestos (límites y gastado) en 0 para poder modificarlos desde 0 en el nuevo mes
+        CATEGORIAS_CONFIG = CATEGORIAS_CONFIG.map(c => ({ ...c, limite: 0 }));
+        localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+
+        Object.keys(estadoApp.gastosPorCategoria).forEach(k => {
+          estadoApp.gastosPorCategoria[k] = 0;
+        });
+
+        // 2. Generar nueva lista de salarios pendientes del nuevo mes
+        SALARIOS_MES = generarSalariosParaMes(infoMes.anio, infoMes.mesIdx);
+        localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
+        localStorage.setItem('cc_active_month', infoMes.key);
+
+        setTimeout(() => {
+          showToast(`🗓️ Nuevo mes (${infoMes.nombre}): Presupuestos reiniciados a ₡0`);
+        }, 800);
+      } else {
+        if (!mesGuardado) {
+          localStorage.setItem('cc_active_month', infoMes.key);
+        }
+        const savedSalarios = JSON.parse(localStorage.getItem(`cc_salarios_${infoMes.key}`) || 'null');
+        if (savedSalarios && Array.isArray(savedSalarios) && savedSalarios.length > 0) {
+          SALARIOS_MES = savedSalarios;
+        } else {
+          SALARIOS_MES = infoMes.key === '2026-11'
+            ? DEFAULT_SALARIOS_NOV.map(s => ({ ...s }))
+            : generarSalariosParaMes(infoMes.anio, infoMes.mesIdx);
+          localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
+        }
+      }
+    }
+
+    function calcularIngresosPendientes() {
+      return (SALARIOS_MES || [])
+        .filter(s => !s.pagado)
+        .reduce((acc, s) => acc + (Number(s.monto) || 0), 0);
+    }
+
+    function renderizarIngresosUI() {
+      const jonaCont = document.getElementById('jonaScheduleList');
+      const fiioCont = document.getElementById('fiioScheduleList');
+      if (!jonaCont || !fiioCont) return;
+
+      const renderItem = (item) => {
+        if (item.pagado) {
+          return `
+            <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="material-symbols-outlined text-[16px] text-secondary shrink-0">check_circle</span>
+                <span class="truncate">${item.label}</span>
+              </div>
+              <span class="font-mono font-bold text-white shrink-0 ml-2">${formatCRC(item.monto)}</span>
+            </div>
+          `;
+        }
+        return `
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container text-xs border border-amber-400/25">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="material-symbols-outlined text-[16px] text-tertiary shrink-0">pending</span>
+              <div class="flex flex-col min-w-0">
+                <span class="truncate text-on-surface font-medium">${item.label}</span>
+                <span class="font-mono font-bold text-amber-300 text-[11px]">${formatCRC(item.monto)}</span>
+              </div>
+            </div>
+            <button onclick="marcarSalarioDepositado('${item.id}')" type="button" class="px-2.5 py-1.5 rounded-lg bg-secondary/20 hover:bg-secondary/30 text-secondary border border-secondary/40 text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer shrink-0 ml-2">
+              <span class="material-symbols-outlined text-[14px]">check</span>
+              <span>Depositado</span>
+            </button>
+          </div>
+        `;
+      };
+
+      const jonaItems = SALARIOS_MES.filter(s => s.persona === 'Jona');
+      const fiioItems = SALARIOS_MES.filter(s => s.persona === 'Fiio');
+
+      jonaCont.innerHTML = jonaItems.map(renderItem).join('');
+      fiioCont.innerHTML = fiioItems.map(renderItem).join('');
+
+      const totalJona = jonaItems.reduce((acc, s) => acc + s.monto, 0);
+      const totalFiio = fiioItems.reduce((acc, s) => acc + s.monto, 0);
+      const totalEsperado = totalJona + totalFiio;
+      const recibido = SALARIOS_MES.filter(s => s.pagado).reduce((acc, s) => acc + s.monto, 0);
+      const pendiente = Math.max(0, totalEsperado - recibido);
+      const pct = totalEsperado > 0 ? Math.round((recibido / totalEsperado) * 100) : 0;
+
+      const pendJonaCount = jonaItems.filter(s => !s.pagado).length;
+      const pendFiioCount = fiioItems.filter(s => !s.pagado).length;
+
+      const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+      setTxt('ingresosTotalEsperadoDisplay', formatCRC(totalEsperado));
+      setTxt('ingresosRecibidoDisplay', `Recibido: ${formatCRC(recibido)}`);
+      setTxt('ingresosPctDisplay', `${pct}%`);
+      setTxt('ingresosPendienteDisplay', formatCRC(pendiente));
+      setTxt('ingresosPendienteCountDisplay', `${pendJonaCount} Jona • ${pendFiioCount} Fiio`);
+      setTxt('jonaTotalMesBadge', `${formatCRC(totalJona)} mes`);
+      setTxt('fiioTotalMesBadge', `${formatCRC(totalFiio)} mes`);
+
+      const bar = document.getElementById('ingresosProgressBar');
+      if (bar) bar.style.width = `${Math.min(100, pct)}%`;
+    }
+
+    window.marcarSalarioDepositado = function(id) {
+      const item = SALARIOS_MES.find(s => s.id === id);
+      if (!item || item.pagado) return;
+
+      item.pagado = true;
+      const infoMes = obtenerInfoMesActual();
+      localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
+
+      // Sumar monto a la cuenta correspondiente
+      const cuenta = item.cuenta || (item.persona === 'Jona' ? 'BAC JONA' : 'BAC FIIO');
+      estadoApp.saldosBruto[cuenta] = (estadoApp.saldosBruto[cuenta] || 0) + item.monto;
+
+      // Agregar al historial reciente
+      const hoy = new Date();
+      const fechaStr = hoy.toISOString().slice(0, 10);
+      const nuevoIngreso = {
+        id: 'SAL-' + Date.now(),
+        fechaHora: fechaStr + ' ' + hoy.toTimeString().slice(0, 8),
+        fecha: fechaStr,
+        usuario: item.persona,
+        accion: 'INGRESO',
+        cuentaTarjeta: cuenta,
+        tipoCuenta: 'DEBITO',
+        categoria: 'INGRESO',
+        monto: item.monto,
+        detalle: item.label,
+        origen: 'PWA_SALARIO'
+      };
+      estadoApp.transaccionesRecientes.unshift(nuevoIngreso);
+
+      renderizarIngresosUI();
+      actualizarUI();
+      showToast(`✅ Depositado: +${formatCRC(item.monto)} en ${cuenta}`);
+
+      // Enviar a Google Apps Script
+      if (scriptUrl) {
+        try {
+          fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nuevoIngreso)
+          });
+        } catch(e) {
+          console.error("Error enviando salario:", e);
+        }
+      }
+    };
+
     // Inicialización al cargar la página
     window.addEventListener('DOMContentLoaded', () => {
       // Registrar Service Worker de forma segura y sin recargas
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').catch(e => console.log('SW registration error:', e));
       }
+
+      try { inicializarSalariosYCambioDeMes(); } catch(e) { console.error("Error en inicializarSalariosYCambioDeMes:", e); }
 
       try {
         const inputUrl = document.getElementById('config-script-url');
@@ -1795,6 +1983,7 @@
 
       try { setupCarousel(); } catch(e) { console.error("Error en setupCarousel:", e); }
       try { renderizarPresupuestosUI(); } catch(e) { console.error("Error en renderizarPresupuestosUI:", e); }
+      try { renderizarIngresosUI(); } catch(e) { console.error("Error en renderizarIngresosUI:", e); }
       try { actualizarUI(); } catch(e) { console.error("Error en actualizarUI:", e); }
       try { sincronizarConGoogleSheets(); } catch(e) { console.error("Error en sincronizarConGoogleSheets:", e); }
     });
@@ -1896,7 +2085,7 @@
       setTxt('card-5-balance', formatCRC(estadoApp.saldosBruto["WINK JONA"] || 0));
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
-      const ingresosFaltantes = 538466; // Salarios pendientes de Noviembre (Jona: 2x 160k + Fiio: 218.4k)
+      const ingresosFaltantes = calcularIngresosPendientes();
       const serviciosPendientes = 456293; // Casa (315k) + Conape (110.8k) + Teléfonos (30.4k)
       const totalDisponible = totalLiquido + ingresosFaltantes;
       const debitoCierreEstimado = totalDisponible - serviciosPendientes;
@@ -1957,13 +2146,17 @@
         totalLimite += cat.limite;
 
         const restante = cat.limite - gastado;
-        const pct = Math.min(130, Math.round((gastado / (cat.limite || 1)) * 100));
+        const pct = cat.limite > 0 ? Math.min(130, Math.round((gastado / cat.limite) * 100)) : (gastado > 0 ? 100 : 0);
 
         let barColor = "bg-secondary";
         let statusText = `${pct}% consumido`;
         let statusClass = "text-secondary";
 
-        if (pct >= 85 && pct <= 100) {
+        if (cat.limite === 0 && gastado === 0) {
+          barColor = "bg-surface-variant";
+          statusText = "Sin asignar";
+          statusClass = "text-on-surface-variant";
+        } else if (pct >= 85 && pct <= 100) {
           barColor = "bg-primary";
           statusClass = "text-primary";
         } else if (pct > 100) {
@@ -2006,7 +2199,7 @@
       document.getElementById('hero-total-display').innerText = formatCRC(totalLimite);
       const totalAvail = totalLimite - totalGastado;
       document.getElementById('hero-avail-display').innerText = `${formatCRC(totalAvail)} disponible`;
-      const totalPct = Math.round((totalGastado / totalLimite) * 100);
+      const totalPct = totalLimite > 0 ? Math.round((totalGastado / totalLimite) * 100) : 0;
       document.getElementById('hero-percent-display').innerText = `${totalPct}% consumido`;
       document.getElementById('hero-progress-bar').style.width = `${Math.min(100, totalPct)}%`;
 
@@ -2342,7 +2535,12 @@
 
     // Cálculo y Desglose de Gastos del Mes por Cuenta
     function calcularDesgloseGastosCuenta(cuentaKey) {
-      const txs = (estadoApp.transaccionesRecientes || []).filter(t => t.cuentaTarjeta === cuentaKey && t.accion === 'GASTO');
+      const mesActualKey = obtenerInfoMesActual().key;
+      const txs = (estadoApp.transaccionesRecientes || []).filter(t => {
+        if (t.cuentaTarjeta !== cuentaKey || t.accion !== 'GASTO') return false;
+        const f = String(t.fecha || t.fechaHora || '');
+        return !f || f.startsWith(mesActualKey);
+      });
       const porCat = {};
       let total = 0;
       txs.forEach(t => {
@@ -2632,6 +2830,15 @@
       const info = calcularSaldoLibrePresupuesto();
 
       list.innerHTML = `
+        <!-- Botones Rápidos de Inicio de Mes -->
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <button onclick="resetearPresupuestosCero()" type="button" class="flex-1 py-1.5 px-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface text-[11px] font-semibold border border-outline-variant/30 transition-colors cursor-pointer">
+            Poner todo en ₡0
+          </button>
+          <button onclick="cargarPresupuestosBase()" type="button" class="flex-1 py-1.5 px-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-primary text-[11px] font-semibold border border-primary/30 transition-colors cursor-pointer">
+            Cargar Base (₡898k)
+          </button>
+        </div>
         <!-- Acceso Rápido para Mover Dinero Libre a Colchón -->
         ${info.saldoLibre > 0 ? `
           <div class="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between text-xs mb-1">
@@ -2667,7 +2874,7 @@
           <input type="range" 
                  id="budget-slider-${idx}" 
                  class="w-full accent-primary cursor-pointer h-1.5" 
-                 min="5000" 
+                 min="0" 
                  max="600000" 
                  step="5000" 
                  value="${c.limite}" 
@@ -2678,6 +2885,36 @@
       recalcularModalTotal();
       modal.classList.remove('opacity-0', 'pointer-events-none');
       sheet.classList.remove('translate-y-full');
+    };
+
+    window.resetearPresupuestosCero = function() {
+      CATEGORIAS_CONFIG.forEach((c, idx) => {
+        c.limite = 0;
+        const inp = document.getElementById(`budget-input-${idx}`);
+        const sld = document.getElementById(`budget-slider-${idx}`);
+        if (inp) inp.value = 0;
+        if (sld) sld.value = 0;
+      });
+      localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      recalcularModalTotal();
+      renderizarPresupuestosUI();
+      showToast("🔄 Presupuestos puestos en ₡0");
+    };
+
+    window.cargarPresupuestosBase = function() {
+      CATEGORIAS_CONFIG.forEach((c, idx) => {
+        const def = DEFAULT_CATEGORIAS.find(d => d.key === c.key);
+        const val = def ? def.limite : 0;
+        c.limite = val;
+        const inp = document.getElementById(`budget-input-${idx}`);
+        const sld = document.getElementById(`budget-slider-${idx}`);
+        if (inp) inp.value = val;
+        if (sld) sld.value = val;
+      });
+      localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      recalcularModalTotal();
+      renderizarPresupuestosUI();
+      showToast("✅ Presupuestos base cargados");
     };
 
     window.closeBudgetModal = function() {
