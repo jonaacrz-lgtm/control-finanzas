@@ -1805,6 +1805,24 @@
 
     let SALARIOS_MES = [];
 
+    function esFechaDelMes(fechaVal, mesKey) {
+      if (!fechaVal) return true;
+      const s = String(fechaVal).trim();
+      if (s.startsWith(mesKey)) return true;
+      // Manejar dd/MM/yyyy
+      const dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+      if (dmy) {
+        return `${dmy[3]}-${dmy[2].padStart(2, '0')}` === mesKey;
+      }
+      // Manejar Date.toString() ej: "Thu Nov 19 2026..."
+      const dt = new Date(s);
+      if (!isNaN(dt.getTime())) {
+        const k = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`;
+        return k === mesKey;
+      }
+      return false;
+    }
+
     function inicializarSalariosYCambioDeMes() {
       const infoMes = obtenerInfoMesActual();
       const mesGuardado = localStorage.getItem('cc_active_month');
@@ -1815,7 +1833,7 @@
       if (pBadge) pBadge.innerText = infoMes.nombre;
       if (iBadge) iBadge.innerText = infoMes.nombre;
 
-      // Verificar si cambió el mes (día 1 del nuevo mes)
+      // Verificar si cambió el mes (solo cuando llega el día 1 de un mes nuevo)
       if (mesGuardado && mesGuardado !== infoMes.key) {
         // 1. Poner los presupuestos (límites y gastado) en 0 para poder modificarlos desde 0 en el nuevo mes
         CATEGORIAS_CONFIG = CATEGORIAS_CONFIG.map(c => ({ ...c, limite: 0 }));
@@ -1837,6 +1855,12 @@
         if (!mesGuardado) {
           localStorage.setItem('cc_active_month', infoMes.key);
         }
+        // Si estamos en Noviembre 2026 y por error quedaron en 0, restaurar los límites del mes actual
+        if (infoMes.key === '2026-11' && CATEGORIAS_CONFIG.every(c => (Number(c.limite) || 0) === 0)) {
+          CATEGORIAS_CONFIG = DEFAULT_CATEGORIAS.map(c => ({ ...c }));
+          localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+        }
+
         const savedSalarios = JSON.parse(localStorage.getItem(`cc_salarios_${infoMes.key}`) || 'null');
         if (savedSalarios && Array.isArray(savedSalarios) && savedSalarios.length > 0) {
           SALARIOS_MES = savedSalarios;
@@ -2538,8 +2562,7 @@
       const mesActualKey = obtenerInfoMesActual().key;
       const txs = (estadoApp.transaccionesRecientes || []).filter(t => {
         if (t.cuentaTarjeta !== cuentaKey || t.accion !== 'GASTO') return false;
-        const f = String(t.fecha || t.fechaHora || '');
-        return !f || f.startsWith(mesActualKey);
+        return esFechaDelMes(t.fecha || t.fechaHora, mesActualKey);
       });
       const porCat = {};
       let total = 0;
@@ -3042,12 +3065,26 @@
           estadoApp.saldosBruto = data.saldosBruto || estadoApp.saldosBruto;
           estadoApp.saldosMesPasado = data.saldosMesPasado || estadoApp.saldosMesPasado;
           estadoApp.tarjetasCredito = data.tarjetasCredito || estadoApp.tarjetasCredito;
-          estadoApp.gastosPorCategoria = data.gastosPorCategoria || estadoApp.gastosPorCategoria;
-          if (data.presupuestoPorAsignar !== undefined) {
-            estadoApp.presupuestoPorAsignar = data.presupuestoPorAsignar;
-          }
           if (data.transaccionesRecientes && data.transaccionesRecientes.length > 0) {
             estadoApp.transaccionesRecientes = data.transaccionesRecientes;
+          }
+          const remoteCats = data.gastosPorCategoria || {};
+          const hasRemoteSpent = Object.values(remoteCats).some(v => Number(v) > 0);
+          if (hasRemoteSpent) {
+            estadoApp.gastosPorCategoria = remoteCats;
+          } else if (estadoApp.transaccionesRecientes && estadoApp.transaccionesRecientes.length > 0) {
+            // Fallback: calcular gastos del mes actual desde transaccionesRecientes
+            const mesKey = obtenerInfoMesActual().key;
+            const calc = {};
+            estadoApp.transaccionesRecientes.forEach(t => {
+              if (t.accion === 'GASTO' && esFechaDelMes(t.fecha || t.fechaHora, mesKey)) {
+                calc[t.categoria] = (calc[t.categoria] || 0) + (Number(t.monto) || 0);
+              }
+            });
+            estadoApp.gastosPorCategoria = calc;
+          }
+          if (data.presupuestoPorAsignar !== undefined) {
+            estadoApp.presupuestoPorAsignar = data.presupuestoPorAsignar;
           }
           if (data.cuentaConectada) {
             const el = document.getElementById('ajustes-email-conectado');
