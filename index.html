@@ -1998,6 +1998,15 @@
       setTxt('card-4-next-cycle', formatCRC(visa.acumuladoProximoCorte ?? (estadoApp.saldosBruto["VISA BAC"] || 0)));
 
       setTxt('card-5-balance', formatCRC(estadoApp.saldosBruto["WINK JONA"] || 0));
+      // Sincronizar también clones del carrusel circular para todas las tarjetas
+      document.querySelectorAll('#carouselWrapper .card-item[data-clone]').forEach(clone => {
+        const cIdx = Number(clone.getAttribute('data-index'));
+        const cData = CARDS_DATA[cIdx];
+        if (!cData) return;
+        const valText = formatCRC(estadoApp.saldosBruto[cData.accountKey] || 0);
+        const balSpan = clone.querySelector('.font-title-md.font-bold:not(.font-mono)') || clone.querySelector('[data-clone-balance]');
+        if (balSpan && balSpan.innerText.includes('₡')) balSpan.innerText = valText;
+      });
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
       const ingresosFaltantes = calcularIngresosPendientes();
@@ -2988,11 +2997,33 @@
         const resp = await fetch(fetchUrl, { method: 'GET', redirect: 'follow' });
         const data = await resp.json();
         if (data && data.status === 'ok') {
-          estadoApp.saldosBruto = data.saldosBruto || estadoApp.saldosBruto;
+          if (data.saldosBruto) {
+            const prevWink = estadoApp.saldosBruto["WINK JONA"] || 0;
+            estadoApp.saldosBruto = { ...estadoApp.saldosBruto, ...data.saldosBruto };
+            if (data.saldosBruto["WINK JONA"] === undefined) {
+              estadoApp.saldosBruto["WINK JONA"] = prevWink;
+            }
+          }
           estadoApp.saldosMesPasado = data.saldosMesPasado || estadoApp.saldosMesPasado;
           estadoApp.tarjetasCredito = data.tarjetasCredito || estadoApp.tarjetasCredito;
           if (data.transaccionesRecientes && data.transaccionesRecientes.length > 0) {
             estadoApp.transaccionesRecientes = data.transaccionesRecientes;
+          }
+          // Respaldo para WINK JONA: si vino sin saldo o en 0 del servidor, calcular desde los movimientos de REGISTRO_PWA
+          if (!data.saldosBruto || data.saldosBruto["WINK JONA"] === undefined || Number(estadoApp.saldosBruto["WINK JONA"]) === 0) {
+            let winkCalc = 0;
+            [...(estadoApp.transaccionesRecientes || [])].reverse().forEach(t => {
+              const cta = String(t.cuentaTarjeta || '').toUpperCase();
+              const det = String(t.detalle || '').toUpperCase();
+              const m = Number(t.monto) || 0;
+              if (cta.includes('WINK')) {
+                if (t.accion === 'INGRESO') winkCalc += m;
+                else if (t.accion === 'GASTO' || t.accion === 'TRANSFERENCIA' || t.accion === 'PAGO_TARJETA') winkCalc = Math.max(0, winkCalc - m);
+              } else if ((t.accion === 'TRANSFERENCIA' || t.accion === 'PAGO_TARJETA') && det.includes('DESTINO: WINK')) {
+                winkCalc += m;
+              }
+            });
+            if (winkCalc > 0) estadoApp.saldosBruto["WINK JONA"] = winkCalc;
           }
           const remoteCats = data.gastosPorCategoria || {};
           const hasRemoteSpent = Object.values(remoteCats).some(v => Number(v) > 0);
