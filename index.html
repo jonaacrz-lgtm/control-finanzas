@@ -274,7 +274,7 @@
               </div>
               <div class="space-y-1 relative z-10">
                 <div class="flex justify-between text-[11px] font-label-md text-on-surface-variant">
-                  <span>🔴 Pagar 24 Nov: <b class="text-emerald-400" id="card-3-pay-now">₡0 (Pagado)</b></span>
+                  <span><span id="card-3-pay-label">🔴 Pagar 24 Nov:</span> <b class="text-emerald-400" id="card-3-pay-now">₡0 (Pagado)</b></span>
                   <span>🟡 En curso: <b class="text-amber-300" id="card-3-next-cycle">₡77.702</b></span>
                 </div>
                 <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -305,7 +305,7 @@
               </div>
               <div class="space-y-1 relative z-10">
                 <div class="flex justify-between text-[11px] font-label-md text-on-surface-variant">
-                  <span>🔴 Pagar 24 Nov: <b class="text-emerald-400" id="card-4-pay-now">₡0 (Pagado)</b></span>
+                  <span><span id="card-4-pay-label">🔴 Pagar 24 Nov:</span> <b class="text-emerald-400" id="card-4-pay-now">₡0 (Pagado)</b></span>
                   <span>🟡 En curso: <b class="text-amber-300" id="card-4-next-cycle">₡108.317</b></span>
                 </div>
                 <div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
@@ -678,7 +678,7 @@
               <p class="font-label-md text-label-md text-on-surface-variant text-[11px]">8 Servicios y débitos automáticos programados</p>
             </div>
           </div>
-          <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-mono text-xs font-bold border border-primary/20">
+          <span class="px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-mono text-xs font-bold border border-primary/20" id="pagosMesBadge">
             Noviembre
           </span>
         </div>
@@ -687,26 +687,26 @@
         <div class="grid grid-cols-3 gap-2 pt-1 relative z-10">
           <div class="bg-surface-container p-2.5 rounded-xl border border-outline-variant/20 text-center">
             <span class="text-[10px] font-label-md text-on-surface-variant block uppercase font-medium">Total Fijo</span>
-            <span class="font-mono font-bold text-on-surface text-[14px] mt-0.5 block">₡494.950</span>
+            <span class="font-mono font-bold text-on-surface text-[14px] mt-0.5 block" id="pagosTotalFijoDisplay">₡494.950</span>
           </div>
           <div class="bg-surface-container p-2.5 rounded-xl border border-emerald-500/25 text-center">
-            <span class="text-[10px] font-label-md text-emerald-400 block uppercase font-medium">Pagados (5)</span>
-            <span class="font-mono font-bold text-emerald-400 text-[14px] mt-0.5 block">₡38.612</span>
+            <span class="text-[10px] font-label-md text-emerald-400 block uppercase font-medium" id="pagosPagadosCountLabel">Pagados (5)</span>
+            <span class="font-mono font-bold text-emerald-400 text-[14px] mt-0.5 block" id="pagosPagadosMontoDisplay">₡38.612</span>
           </div>
           <div class="bg-surface-container p-2.5 rounded-xl border border-rose-500/25 text-center">
-            <span class="text-[10px] font-label-md text-rose-300 block uppercase font-medium">Pendientes (3)</span>
-            <span class="font-mono font-bold text-rose-300 text-[14px] mt-0.5 block">₡456.338</span>
+            <span class="text-[10px] font-label-md text-rose-300 block uppercase font-medium" id="pagosPendientesCountLabel">Pendientes (3)</span>
+            <span class="font-mono font-bold text-rose-300 text-[14px] mt-0.5 block" id="pagosPendientesMontoDisplay">₡456.338</span>
           </div>
         </div>
 
         <div class="flex items-center justify-between text-xs pt-1 px-0.5 text-on-surface-variant relative z-10">
-          <span class="flex items-center gap-1">
+          <span class="flex items-center gap-1" id="pagosSummaryLeft">
             <span class="material-symbols-outlined text-[15px] text-emerald-400">check_circle</span>
-            5 rebajados a inicio de quincena
+            <span>5 completados</span>
           </span>
-          <span class="flex items-center gap-1 text-rose-300 font-semibold">
+          <span class="flex items-center gap-1 text-rose-300 font-semibold" id="pagosSummaryRight">
             <span class="material-symbols-outlined text-[15px]">pending_actions</span>
-            3 a pagar fin de mes
+            <span>3 por pagar</span>
           </span>
         </div>
       </section>
@@ -715,271 +715,11 @@
       <section class="flex flex-col space-y-3">
         <div class="flex items-center justify-between px-1">
           <h3 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Cronograma de Débitos Automáticos</h3>
-          <span class="text-[11px] font-label-md text-on-surface-variant font-medium">8 compromisos</span>
+          <span class="text-[11px] font-label-md text-on-surface-variant font-medium" id="pagosTotalCountBadge">8 compromisos</span>
         </div>
 
         <div class="space-y-2.5" id="serviciosRecurrentesList">
-
-          <!-- 1. Alquiler Casa -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-rose-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">home</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Alquiler Casa</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Vivienda &amp; Condominio</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-rose-300 text-[16px] block">₡315.000</span>
-                <span class="px-2 py-0.5 rounded-full bg-rose-950/70 border border-rose-500/40 text-rose-300 text-[10px] font-bold inline-block">PENDIENTE</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
-                <span>Último día del mes (30 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC FIIO (••3533)
-                </span>
-              </div>
-            </div>
-            <button onclick="abrirModalConPago('Alquiler Casa', 315000, 'BAC FIIO', 'CASA')" class="w-full mt-1 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-primary border border-primary/25 font-label-md text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-all">
-              <span class="material-symbols-outlined text-[15px]">send_money</span>
-              <span>Registrar Pago en Google Sheets</span>
-            </button>
-          </div>
-
-          <!-- 2. CONAPE -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-rose-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-500/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">school</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">CONAPE</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Préstamo Educativo</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-rose-300 text-[16px] block">₡110.838</span>
-                <span class="px-2 py-0.5 rounded-full bg-rose-950/70 border border-rose-500/40 text-rose-300 text-[10px] font-bold inline-block">PENDIENTE</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
-                <span>Último día del mes (30 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC FIIO (••3533)
-                </span>
-              </div>
-            </div>
-            <button onclick="abrirModalConPago('CONAPE', 110838, 'BAC FIIO', 'CONAPE')" class="w-full mt-1 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-primary border border-primary/25 font-label-md text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-all">
-              <span class="material-symbols-outlined text-[15px]">send_money</span>
-              <span>Registrar Pago en Google Sheets</span>
-            </button>
-          </div>
-
-          <!-- 3. Teléfonos -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-rose-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">phone_iphone</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Teléfonos</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Kölbi &amp; Planes Móviles</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-rose-300 text-[16px] block">₡30.500</span>
-                <span class="px-2 py-0.5 rounded-full bg-rose-950/70 border border-rose-500/40 text-rose-300 text-[10px] font-bold inline-block">PENDIENTE</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
-                <span>Último día del mes (30 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC JONA (••9737)
-                </span>
-              </div>
-            </div>
-            <button onclick="abrirModalConPago('Teléfonos', 30500, 'BAC JONA', 'TELEFONOS')" class="w-full mt-1 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-primary border border-primary/25 font-label-md text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-all">
-              <span class="material-symbols-outlined text-[15px]">send_money</span>
-              <span>Registrar Pago en Google Sheets</span>
-            </button>
-          </div>
-
-          <!-- 4. Medismart -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-300 border border-teal-500/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">health_and_safety</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Medismart</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Plan Médico Familiar</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-emerald-400 text-[16px] block">₡14.000</span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-emerald-400">event_available</span>
-                <span>12 - 15 de cada mes (Cobrado 13 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC JONA (••9737)
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Netflix -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-rose-600/20 text-rose-400 border border-rose-600/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">movie</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Netflix</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Streaming Hogar</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-emerald-400 text-[16px] block">₡9.500</span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-emerald-400">event_available</span>
-                <span>2 de cada mes (Cobrado 2 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC JONA (••9737)
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6. YouTube Premium -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-red-600/20 text-red-400 border border-red-600/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">smart_display</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">YouTube Premium</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Música &amp; Streaming</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-emerald-400 text-[16px] block">₡8.500</span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-emerald-400">event_available</span>
-                <span>2 de cada mes (Cobrado 2 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-[#e31937]/30 text-white font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#e31937]"></span> BAC FIIO (••3533)
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. Seguro contra robo VISA BAC -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-600/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">shield</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Seguro contra robo VISA BAC</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Protección Tarjeta Crédito</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-emerald-400 text-[16px] block">₡3.306</span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-emerald-400">event_available</span>
-                <span>Primeros días del mes</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-blue-500/40 text-blue-300 font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#1d4ed8]"></span> VISA BAC (••5842)
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 8. Seguro contra robo AMEX BAC -->
-          <div class="p-3.5 rounded-2xl bg-surface-container-low border border-emerald-500/30 flex flex-col gap-2.5 shadow-md">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <div class="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-[20px]">shield</span>
-                </div>
-                <div>
-                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm">Seguro contra robo AMEX BAC</h4>
-                  <span class="text-[11px] text-on-surface-variant block font-label-md">Protección Tarjeta Crédito</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="font-mono font-bold text-emerald-400 text-[16px] block">₡3.306</span>
-                <span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
-              <div class="flex items-center gap-1.5 text-on-surface-variant">
-                <span class="material-symbols-outlined text-[15px] text-emerald-400">event_available</span>
-                <span>Primeros días del mes (Cobrado 12 Nov)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] text-on-surface-variant">Rebajo:</span>
-                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-sky-400/40 text-sky-300 font-semibold text-[11px] flex items-center gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#0284c7]"></span> AMEX BAC (••5509)
-                </span>
-              </div>
-            </div>
-          </div>
-
+          <!-- Renderizado dinámicamente por renderizarPagosUI() -->
         </div>
       </section>
     </div>
@@ -1805,16 +1545,39 @@
 
     let SALARIOS_MES = [];
 
+    const DEFAULT_PAGOS_MENSUALES = [
+      { id: 'pago-casa', servicio: 'Alquiler Casa', subtitulo: 'Vivienda & Condominio', monto: 315000, cuenta: 'BAC FIIO', categoria: 'CASA', fechaLabel: 'Pagar fin de mes (28-30)', icon: 'home', color: 'amber', pagado: false },
+      { id: 'pago-conape', servicio: 'CONAPE', subtitulo: 'Préstamo Educativo', monto: 110838, cuenta: 'BAC FIIO', categoria: 'CONAPE', fechaLabel: 'Pagar fin de mes (28)', icon: 'school', color: 'blue', pagado: false },
+      { id: 'pago-tels', servicio: 'Teléfonos (Kölbi / Planes)', subtitulo: 'Telefonía Móvil Pareja', monto: 30500, cuenta: 'BAC JONA', categoria: 'TELEFONOS', fechaLabel: 'Pagar fin de mes (25)', icon: 'phone_iphone', color: 'purple', pagado: false },
+      { id: 'pago-medi', servicio: 'Medismart (Salud)', subtitulo: 'Plan Médico Familiar', monto: 7600, cuenta: 'BAC JONA', categoria: 'SALUD', fechaLabel: 'Primeros días del mes', icon: 'medical_services', color: 'emerald', pagado: true },
+      { id: 'pago-yt', servicio: 'YouTube Premium', subtitulo: 'Streaming & Música', monto: 7400, cuenta: 'BAC JONA', categoria: 'STREAMING', fechaLabel: 'Primeros días del mes', icon: 'play_circle', color: 'red', pagado: true },
+      { id: 'pago-nf', servicio: 'Netflix', subtitulo: 'Streaming Hogar', monto: 8977, cuenta: 'BAC FIIO', categoria: 'STREAMING', fechaLabel: 'Primeros días del mes', icon: 'movie', color: 'red', pagado: true },
+      { id: 'pago-seg-visa', servicio: 'Seguro contra robo VISA BAC', subtitulo: 'Protección Tarjeta Crédito', monto: 11329, cuenta: 'VISA BAC', categoria: 'SEGUROS', fechaLabel: 'Primeros días del mes', icon: 'shield', color: 'blue', pagado: true },
+      { id: 'pago-seg-amex', servicio: 'Seguro contra robo AMEX BAC', subtitulo: 'Protección Tarjeta Crédito', monto: 3306, cuenta: 'AMEX BAC', categoria: 'SEGUROS', fechaLabel: 'Primeros días del mes', icon: 'verified_user', color: 'sky', pagado: true }
+    ];
+
+    let PAGOS_MENSUALES_STATE = [];
+
+    function guardarConfigEnNube(clave, valor) {
+      if (!scriptUrl) return;
+      try {
+        fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'SAVE_CONFIG', clave, valor })
+        }).catch(e => console.log('Sync config pendiente:', e));
+      } catch (e) {}
+    }
+
     function esFechaDelMes(fechaVal, mesKey) {
       if (!fechaVal) return true;
       const s = String(fechaVal).trim();
       if (s.startsWith(mesKey)) return true;
-      // Manejar dd/MM/yyyy
       const dmy = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
       if (dmy) {
         return `${dmy[3]}-${dmy[2].padStart(2, '0')}` === mesKey;
       }
-      // Manejar Date.toString() ej: "Thu Nov 19 2026..."
       const dt = new Date(s);
       if (!isNaN(dt.getTime())) {
         const k = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}`;
@@ -1826,16 +1589,28 @@
     function inicializarSalariosYCambioDeMes() {
       const infoMes = obtenerInfoMesActual();
       const mesGuardado = localStorage.getItem('cc_active_month');
+      const mesesCortos = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      const mesCortoHoy = mesesCortos[infoMes.mesIdx];
+      const diaHoy = new Date().getDate();
+      // Si es después del 24, el próximo pago es el 24 del mes siguiente
+      const mesPagoIdx = diaHoy > 24 ? (infoMes.mesIdx + 1) % 12 : infoMes.mesIdx;
+      const labelPago24 = `🔴 Pagar 24 ${mesesCortos[mesPagoIdx]}:`;
 
       // Actualizar etiquetas del mes en UI
       const pBadge = document.getElementById('presupuestosMesBadge');
       const iBadge = document.getElementById('ingresosMesBadge');
+      const pgBadge = document.getElementById('pagosMesBadge');
+      const c3Lbl = document.getElementById('card-3-pay-label');
+      const c4Lbl = document.getElementById('card-4-pay-label');
       if (pBadge) pBadge.innerText = infoMes.nombre;
       if (iBadge) iBadge.innerText = infoMes.nombre;
+      if (pgBadge) pgBadge.innerText = infoMes.nombre.split(' ')[0];
+      if (c3Lbl) c3Lbl.innerText = labelPago24;
+      if (c4Lbl) c4Lbl.innerText = labelPago24;
 
       // Verificar si cambió el mes (solo cuando llega el día 1 de un mes nuevo)
       if (mesGuardado && mesGuardado !== infoMes.key) {
-        // 1. Poner los presupuestos (límites y gastado) en 0 para poder modificarlos desde 0 en el nuevo mes
+        // 1. Presupuestos en 0 para el nuevo mes
         CATEGORIAS_CONFIG = CATEGORIAS_CONFIG.map(c => ({ ...c, limite: 0 }));
         localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
 
@@ -1846,16 +1621,20 @@
         // 2. Generar nueva lista de salarios pendientes del nuevo mes
         SALARIOS_MES = generarSalariosParaMes(infoMes.anio, infoMes.mesIdx);
         localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
+
+        // 3. Reiniciar los 8 pagos mensuales fijos a Pendiente
+        PAGOS_MENSUALES_STATE = DEFAULT_PAGOS_MENSUALES.map(p => ({ ...p, pagado: false }));
+        localStorage.setItem(`cc_pagos_${infoMes.key}`, JSON.stringify(PAGOS_MENSUALES_STATE));
+
         localStorage.setItem('cc_active_month', infoMes.key);
 
         setTimeout(() => {
-          showToast(`🗓️ Nuevo mes (${infoMes.nombre}): Presupuestos reiniciados a ₡0`);
+          showToast(`🗓️ Nuevo mes (${infoMes.nombre}): Presupuestos y pagos reiniciados`);
         }, 800);
       } else {
         if (!mesGuardado) {
           localStorage.setItem('cc_active_month', infoMes.key);
         }
-        // Si estamos en Noviembre 2026 y por error quedaron en 0, restaurar los límites del mes actual
         if (infoMes.key === '2026-11' && CATEGORIAS_CONFIG.every(c => (Number(c.limite) || 0) === 0)) {
           CATEGORIAS_CONFIG = DEFAULT_CATEGORIAS.map(c => ({ ...c }));
           localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
@@ -1870,8 +1649,114 @@
             : generarSalariosParaMes(infoMes.anio, infoMes.mesIdx);
           localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
         }
+
+        const savedPagos = JSON.parse(localStorage.getItem(`cc_pagos_${infoMes.key}`) || 'null');
+        if (savedPagos && Array.isArray(savedPagos) && savedPagos.length > 0) {
+          PAGOS_MENSUALES_STATE = savedPagos;
+        } else {
+          PAGOS_MENSUALES_STATE = DEFAULT_PAGOS_MENSUALES.map(p => ({
+            ...p,
+            pagado: infoMes.key === '2026-11' ? p.pagado : false
+          }));
+          localStorage.setItem(`cc_pagos_${infoMes.key}`, JSON.stringify(PAGOS_MENSUALES_STATE));
+        }
       }
     }
+
+    function calcularServiciosPendientes() {
+      return (PAGOS_MENSUALES_STATE || [])
+        .filter(p => !p.pagado)
+        .reduce((acc, p) => acc + (Number(p.monto) || 0), 0);
+    }
+
+    function renderizarPagosUI() {
+      const cont = document.getElementById('serviciosRecurrentesList');
+      if (!cont) return;
+
+      const items = PAGOS_MENSUALES_STATE || [];
+      const totalFijo = items.reduce((a, p) => a + (Number(p.monto) || 0), 0);
+      const pagados = items.filter(p => p.pagado);
+      const pendientes = items.filter(p => !p.pagado);
+      const montoPagado = pagados.reduce((a, p) => a + (Number(p.monto) || 0), 0);
+      const montoPendiente = pendientes.reduce((a, p) => a + (Number(p.monto) || 0), 0);
+
+      const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+      setTxt('pagosTotalFijoDisplay', formatCRC(totalFijo));
+      setTxt('pagosPagadosCountLabel', `Pagados (${pagados.length})`);
+      setTxt('pagosPagadosMontoDisplay', formatCRC(montoPagado));
+      setTxt('pagosPendientesCountLabel', `Pendientes (${pendientes.length})`);
+      setTxt('pagosPendientesMontoDisplay', formatCRC(montoPendiente));
+      setTxt('pagosTotalCountBadge', `${items.length} compromisos`);
+
+      const leftEl = document.getElementById('pagosSummaryLeft');
+      const rightEl = document.getElementById('pagosSummaryRight');
+      if (leftEl) leftEl.innerHTML = `<span class="material-symbols-outlined text-[15px] text-emerald-400">check_circle</span><span>${pagados.length} completados</span>`;
+      if (rightEl) rightEl.innerHTML = `<span class="material-symbols-outlined text-[15px]">pending_actions</span><span>${pendientes.length} por pagar</span>`;
+
+      cont.innerHTML = items.map(p => {
+        const isCredit = p.cuenta.includes('VISA') || p.cuenta.includes('AMEX');
+        const dotColor = p.cuenta === 'VISA BAC' ? 'bg-[#1d4ed8]' : (p.cuenta === 'AMEX BAC' ? 'bg-[#0284c7]' : 'bg-[#e31937]');
+        const borderClass = p.pagado ? 'border-emerald-500/25' : 'border-rose-500/30';
+
+        return `
+          <div class="p-3.5 rounded-2xl bg-surface-container-low border ${borderClass} flex flex-col gap-2.5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div class="w-9 h-9 rounded-xl ${p.pagado ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border-amber-500/30'} border flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">${p.icon || 'payments'}</span>
+                </div>
+                <div class="min-w-0">
+                  <h4 class="font-title-md text-title-md text-on-surface font-semibold text-sm truncate">${p.servicio}</h4>
+                  <span class="text-[11px] text-on-surface-variant block font-label-md truncate">${p.subtitulo}</span>
+                </div>
+              </div>
+              <div class="text-right shrink-0 ml-2">
+                <span class="font-mono font-bold ${p.pagado ? 'text-emerald-400' : 'text-rose-300'} text-[15px] block">${formatCRC(p.monto)}</span>
+                ${p.pagado
+                  ? `<span class="px-2 py-0.5 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold inline-block">PAGADO ✅</span>`
+                  : `<span class="px-2 py-0.5 rounded-full bg-rose-950/80 border border-rose-500/40 text-rose-300 text-[10px] font-bold inline-block">PENDIENTE</span>`
+                }
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs">
+              <div class="flex items-center gap-1.5 text-on-surface-variant truncate">
+                <span class="material-symbols-outlined text-[15px] ${p.pagado ? 'text-emerald-400' : 'text-rose-300'}">${p.pagado ? 'event_available' : 'calendar_month'}</span>
+                <span class="truncate">${p.fechaLabel}</span>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant/30 text-on-surface font-semibold text-[11px] flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span> ${p.cuenta}
+                </span>
+              </div>
+            </div>
+            ${!p.pagado ? `
+              <div class="flex gap-2 mt-0.5">
+                <button onclick="abrirModalConPago('${p.servicio}', ${p.monto}, '${p.cuenta}', '${p.categoria}', '${p.id}')" type="button" class="flex-1 py-1.5 rounded-xl bg-surface-container-high hover:bg-surface-bright text-primary border border-primary/25 font-label-md text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-all">
+                  <span class="material-symbols-outlined text-[15px]">payments</span>
+                  <span>Registrar Pago</span>
+                </button>
+                <button onclick="marcarPagoMensualPagado('${p.id}')" type="button" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-label-md text-xs font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all" title="Marcar como ya pagado este mes">
+                  <span class="material-symbols-outlined text-[15px]">check</span>
+                  <span>Ya Pagado</span>
+                </button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.marcarPagoMensualPagado = function(id) {
+      const p = (PAGOS_MENSUALES_STATE || []).find(item => item.id === id);
+      if (!p || p.pagado) return;
+      p.pagado = true;
+      const infoMes = obtenerInfoMesActual();
+      localStorage.setItem(`cc_pagos_${infoMes.key}`, JSON.stringify(PAGOS_MENSUALES_STATE));
+      guardarConfigEnNube(`PAGOS_${infoMes.key}`, PAGOS_MENSUALES_STATE);
+      renderizarPagosUI();
+      actualizarUI();
+      showToast(`✅ ${p.servicio} marcado como pagado`);
+    };
 
     function calcularIngresosPendientes() {
       return (SALARIOS_MES || [])
@@ -1949,6 +1834,7 @@
       item.pagado = true;
       const infoMes = obtenerInfoMesActual();
       localStorage.setItem(`cc_salarios_${infoMes.key}`, JSON.stringify(SALARIOS_MES));
+      guardarConfigEnNube(`SALARIOS_${infoMes.key}`, SALARIOS_MES);
 
       // Sumar monto a la cuenta correspondiente
       const cuenta = item.cuenta || (item.persona === 'Jona' ? 'BAC JONA' : 'BAC FIIO');
@@ -2008,6 +1894,7 @@
       try { setupCarousel(); } catch(e) { console.error("Error en setupCarousel:", e); }
       try { renderizarPresupuestosUI(); } catch(e) { console.error("Error en renderizarPresupuestosUI:", e); }
       try { renderizarIngresosUI(); } catch(e) { console.error("Error en renderizarIngresosUI:", e); }
+      try { renderizarPagosUI(); } catch(e) { console.error("Error en renderizarPagosUI:", e); }
       try { actualizarUI(); } catch(e) { console.error("Error en actualizarUI:", e); }
       try { sincronizarConGoogleSheets(); } catch(e) { console.error("Error en sincronizarConGoogleSheets:", e); }
     });
@@ -2046,13 +1933,17 @@
     };
 
     // Pre-llenar y abrir Modal de Transacción para un Pago Mensual
-    window.abrirModalConPago = function(nombreServicio, monto, cuenta, categoria) {
+    let pendingPagoMensualId = null;
+
+    window.abrirModalConPago = function(nombreServicio, monto, cuenta, categoria, pagoId = null) {
+      pendingPagoMensualId = pagoId;
       openModal();
       switchModalTab('gasto');
       const amountInput = document.getElementById('transactionAmountInput');
       if (amountInput) amountInput.value = monto;
+      const mesNombre = obtenerInfoMesActual().nombre.split(' ')[0];
       const detalleInput = document.getElementById('modal-detalle-input');
-      if (detalleInput) detalleInput.value = `${nombreServicio} (Noviembre)`;
+      if (detalleInput) detalleInput.value = `${nombreServicio} (${mesNombre})`;
 
       // Seleccionar cuenta en modal
       const accountBtns = Array.from(document.querySelectorAll('#gastoAccountsGrid .account-btn'));
@@ -2100,17 +1991,17 @@
 
       setTxt('card-3-balance', formatCRC(estadoApp.saldosBruto["AMEX BAC"]));
       setTxt('card-3-pay-now', (amex.aPagarEste24 === 0 || !amex.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(amex.aPagarEste24));
-      setTxt('card-3-next-cycle', formatCRC(amex.acumuladoProximoCorte || 77702));
+      setTxt('card-3-next-cycle', formatCRC(amex.acumuladoProximoCorte ?? (estadoApp.saldosBruto["AMEX BAC"] || 0)));
 
       setTxt('card-4-balance', formatCRC(estadoApp.saldosBruto["VISA BAC"]));
       setTxt('card-4-pay-now', (visa.aPagarEste24 === 0 || !visa.aPagarEste24) ? "₡0 (Pagado)" : formatCRC(visa.aPagarEste24));
-      setTxt('card-4-next-cycle', formatCRC(visa.acumuladoProximoCorte || 108317));
+      setTxt('card-4-next-cycle', formatCRC(visa.acumuladoProximoCorte ?? (estadoApp.saldosBruto["VISA BAC"] || 0)));
 
       setTxt('card-5-balance', formatCRC(estadoApp.saldosBruto["WINK JONA"] || 0));
 
       // 3. Proyección de Cierre de Mes & Salud Financiera
       const ingresosFaltantes = calcularIngresosPendientes();
-      const serviciosPendientes = 456293; // Casa (315k) + Conape (110.8k) + Teléfonos (30.4k)
+      const serviciosPendientes = calcularServiciosPendientes();
       const totalDisponible = totalLiquido + ingresosFaltantes;
       const debitoCierreEstimado = totalDisponible - serviciosPendientes;
 
@@ -2125,33 +2016,50 @@
       const coberturaBar = document.getElementById('projCoberturaBar');
       const coberturaPct = document.getElementById('projCoberturaPct');
       if (coberturaBar && coberturaPct) {
-        const pct = Math.min(100, Math.round((totalDisponible / serviciosPendientes) * 100));
+        const pct = serviciosPendientes > 0 ? Math.min(100, Math.round((totalDisponible / serviciosPendientes) * 100)) : 100;
         coberturaBar.style.width = `${pct}%`;
         coberturaPct.innerText = `${pct}% cubierto`;
       }
 
       try { renderizarPresupuestosUI(); } catch(e) {}
       try { renderizarMovimientosRecientes(); } catch(e) {}
+      try { renderizarPagosUI(); } catch(e) {}
       try { updateDetails(activeCardIndex); } catch(e) {}
     }
 
-    // Cálculo de Dinero Libre No Asignado
-    function calcularSaldoLibrePresupuesto() {
-      // 1. Ingreso imprevisto no contemplado en presupuestos base (Venta deck apple ₡20.000 en Davivienda)
-      const INGRESO_EXTRA_BASE = 20000;
+    // Cálculo de Dinero Libre No Asignado:
+    // (Saldo inicio de mes + Total ingresos del mes) - Total asignado a presupuestos
+    function calcularSaldoLibrePresupuesto(customTotalAsignado) {
+      const mp = estadoApp.saldosMesPasado || {};
+      const saldoInicioMes = (Number(mp["BAC FIIO"]) || 0) +
+                             (Number(mp["BAC JONA"]) || 0) +
+                             (Number(mp["DAVI JONA"]) || 0) +
+                             (Number(mp["WINK JONA"]) || 0) +
+                             (Number(mp["BN JONA"]) || 0);
 
-      // 2. Diferencia entre lo asignado en sobres y la base
-      const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
-      const actualCategoriasSum = CATEGORIAS_CONFIG.reduce((acc, c) => acc + (Number(c.limite) || 0), 0);
-      const deltaAsignado = Math.max(0, actualCategoriasSum - baseCategoriasSum);
+      const totalSalariosMes = (SALARIOS_MES || []).reduce((acc, s) => acc + (Number(s.monto) || 0), 0);
+      const mesKey = obtenerInfoMesActual().key;
+      const ingresosExtrasMes = (estadoApp.transaccionesRecientes || [])
+        .filter(t => {
+          if (t.accion !== 'INGRESO' || !esFechaDelMes(t.fecha || t.fechaHora, mesKey)) return false;
+          const det = String(t.detalle || '').toLowerCase();
+          return !det.includes('salario') && !det.includes('quincena') && !det.includes('nómina') && !det.includes('nomina') && !det.includes('comisión') && !det.includes('comision');
+        })
+        .reduce((acc, t) => acc + (Number(t.monto) || 0), 0);
 
-      // Saldo libre real disponible
-      const saldoLibre = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
-      const compromisosFijos = 966039; // Casa + Conape + Teléfonos + Streaming/Salud + Pagos fijos
+      const totalIngresosMes = totalSalariosMes + ingresosExtrasMes;
+      const totalAsignado = customTotalAsignado !== undefined
+        ? Number(customTotalAsignado)
+        : CATEGORIAS_CONFIG.reduce((acc, c) => acc + (Number(c.limite) || 0), 0);
+
+      const saldoLibre = Math.max(0, (saldoInicioMes + totalIngresosMes) - totalAsignado);
+      const compromisosFijos = (PAGOS_MENSUALES_STATE || []).reduce((acc, p) => acc + (Number(p.monto) || 0), 0);
 
       return {
         saldoLibre,
-        totalAsignado: actualCategoriasSum,
+        saldoInicioMes,
+        totalIngresosMes,
+        totalAsignado,
         compromisosFijos
       };
     }
@@ -2825,6 +2733,20 @@
       document.getElementById('modal-detalle-input').value = '';
       if (document.getElementById('modal-ingreso-detalle')) document.getElementById('modal-ingreso-detalle').value = '';
       if (document.getElementById('modal-movimiento-detalle')) document.getElementById('modal-movimiento-detalle').value = '';
+
+      if (pendingPagoMensualId) {
+        const pagoItem = (PAGOS_MENSUALES_STATE || []).find(p => p.id === pendingPagoMensualId);
+        if (pagoItem && !pagoItem.pagado) {
+          pagoItem.pagado = true;
+          const mesK = obtenerInfoMesActual().key;
+          localStorage.setItem(`cc_pagos_${mesK}`, JSON.stringify(PAGOS_MENSUALES_STATE));
+          guardarConfigEnNube(`PAGOS_${mesK}`, PAGOS_MENSUALES_STATE);
+          renderizarPagosUI();
+          actualizarUI();
+        }
+        pendingPagoMensualId = null;
+      }
+
       showToast(`✅ ${accion} registrado correctamente`);
 
       // Enviar a Google Apps Script
@@ -2910,6 +2832,11 @@
       sheet.classList.remove('translate-y-full');
     };
 
+    function guardarPresupuestosEnNube() {
+      const mesK = obtenerInfoMesActual().key;
+      guardarConfigEnNube(`PRESUPUESTOS_${mesK}`, CATEGORIAS_CONFIG.map(c => ({ key: c.key, limite: Number(c.limite) || 0 })));
+    }
+
     window.resetearPresupuestosCero = function() {
       CATEGORIAS_CONFIG.forEach((c, idx) => {
         c.limite = 0;
@@ -2919,6 +2846,7 @@
         if (sld) sld.value = 0;
       });
       localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      guardarPresupuestosEnNube();
       recalcularModalTotal();
       renderizarPresupuestosUI();
       showToast("🔄 Presupuestos puestos en ₡0");
@@ -2935,6 +2863,7 @@
         if (sld) sld.value = val;
       });
       localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+      guardarPresupuestosEnNube();
       recalcularModalTotal();
       renderizarPresupuestosUI();
       showToast("✅ Presupuestos base cargados");
@@ -2955,6 +2884,7 @@
       });
       if (changed) {
         localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+        guardarPresupuestosEnNube();
       }
       renderizarPresupuestosUI();
 
@@ -2982,10 +2912,7 @@
           const inp = document.getElementById(`budget-input-${i}`);
           if (inp) sumActual += parseFloat(inp.value) || 0;
         });
-        const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
-        const deltaAsignado = Math.max(0, sumActual - baseCategoriasSum);
-        const INGRESO_EXTRA_BASE = 20000;
-        const libreActual = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
+        const libreActual = calcularSaldoLibrePresupuesto(sumActual).saldoLibre;
         if (libreActual > 0) {
           quickAddBudget(extraIdx, libreActual);
           showToast(`✅ ${formatCRC(libreActual)} asignados a Extra/Colchón`);
@@ -3022,17 +2949,15 @@
         if (inp) sum += parseFloat(inp.value) || 0;
       });
 
-      const baseCategoriasSum = DEFAULT_CATEGORIAS.reduce((acc, c) => acc + c.limite, 0);
-      const deltaAsignado = Math.max(0, sum - baseCategoriasSum);
-      const INGRESO_EXTRA_BASE = 20000;
-      const libreActual = Math.max(0, INGRESO_EXTRA_BASE - deltaAsignado);
+      const info = calcularSaldoLibrePresupuesto(sum);
+      const libreActual = info.saldoLibre;
 
       const totalEl = document.getElementById('modal-total-display');
       const balanceEl = document.getElementById('modal-balance-display');
       const unallocatedEl = document.getElementById('modal-unallocated-display');
 
       if (totalEl) totalEl.innerText = formatCRC(sum);
-      if (balanceEl) balanceEl.innerText = formatCRC(966039);
+      if (balanceEl) balanceEl.innerText = formatCRC(info.compromisosFijos || 0);
       if (unallocatedEl) {
         unallocatedEl.innerText = formatCRC(libreActual);
         unallocatedEl.className = `font-title-md text-title-md font-bold font-mono text-xs ${libreActual > 0 ? 'text-emerald-300' : 'text-slate-400'}`;
@@ -3041,6 +2966,7 @@
 
     window.guardarCambiosPresupuesto = function() {
       closeBudgetModal();
+      guardarPresupuestosEnNube();
       showToast("✅ Presupuestos actualizados con éxito");
     };
 
@@ -3085,6 +3011,26 @@
           }
           if (data.presupuestoPorAsignar !== undefined) {
             estadoApp.presupuestoPorAsignar = data.presupuestoPorAsignar;
+          }
+          if (data.configMes) {
+            const mesK = data.configMes.mesKey || obtenerInfoMesActual().key;
+            if (Array.isArray(data.configMes.presupuestos) && data.configMes.presupuestos.length > 0) {
+              data.configMes.presupuestos.forEach(remoteCat => {
+                const target = CATEGORIAS_CONFIG.find(c => c.key === remoteCat.key);
+                if (target) target.limite = Number(remoteCat.limite) || 0;
+              });
+              localStorage.setItem('cc_categorias_config', JSON.stringify(CATEGORIAS_CONFIG));
+            }
+            if (Array.isArray(data.configMes.salarios) && data.configMes.salarios.length > 0) {
+              SALARIOS_MES = data.configMes.salarios;
+              localStorage.setItem(`cc_salarios_${mesK}`, JSON.stringify(SALARIOS_MES));
+              renderizarIngresosUI();
+            }
+            if (Array.isArray(data.configMes.pagosMensuales) && data.configMes.pagosMensuales.length > 0) {
+              PAGOS_MENSUALES_STATE = data.configMes.pagosMensuales;
+              localStorage.setItem(`cc_pagos_${mesK}`, JSON.stringify(PAGOS_MENSUALES_STATE));
+              renderizarPagosUI();
+            }
           }
           if (data.cuentaConectada) {
             const el = document.getElementById('ajustes-email-conectado');
