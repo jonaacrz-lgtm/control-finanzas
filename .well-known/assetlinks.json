@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.jonaacrz_lgtm.twa",
+        "sha256_cert_fingerprints": ["E2:86:6C:C8:A3:AA:62:A1:A5:FD:8A:05:0C:50:A7:87:C2:25:CA:68:96:80:1E:D3:32:97:FC:EA:D9:E4:05:E4"]
+      }
+    }]
